@@ -1,8 +1,8 @@
-package src;
+package src.Method;
 
 public class Tets {
     public static void main(String[] args) {
-        Matrix m1 = new Matrix(0,0);
+        Matrix m1 = new Matrix(0,0); 
         m1.inputRowCol();
         m1.readMatrix();
         if(m1.isIdentity()){
@@ -12,9 +12,9 @@ public class Tets {
             System.out.println("Bukan Identitas");
         }
 
-        m1 = m1.getMinor(m1, 0, 0);
+        m1 = Determinan.getMinor(m1, 0, 0);
         double det;
-        det = m1.determinan(m1);
+        det = Determinan.determinan(m1);
         System.out.println(det);
         m1.displayMatrix();
     

@@ -1,6 +1,9 @@
 package src.Method;
 
-public class Determinan {
+
+public class Determinan { 
+
+    //menghasilkan matrix minor tana baris row dan tanpa kolom col
     public static Matrix getMinor(Matrix m1,int row, int col){
         Matrix minor = new Matrix(m1.row-1,m1.col-1);
         for(int i=0; i<minor.row;i++){
@@ -22,7 +25,8 @@ public class Determinan {
     return minor;
     }
 
-    public static double determinan(Matrix m1){
+    //menghasilkan determinan dari sebuah matrix.
+    public static double determinanKofaktor(Matrix m1){
         if (m1.row == 1){
             return m1.m[0][0];
         }
@@ -34,7 +38,7 @@ public class Determinan {
         int sign =1 ;
       
         for (int i=0; i<m1.col;i++){
-            hasil += sign * m1.m[0][i] * determinan(getMinor(m1,0,i));
+            hasil += sign * m1.m[0][i] * determinanKofaktor(getMinor(m1,0,i));
             sign = -sign;
         }
         return hasil;

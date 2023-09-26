@@ -28,9 +28,9 @@ public class Matrix{
         int row = 0;
         int col = 0;
 
-        System.out.println("Masukan jumlah baris: ");
+        System.out.print("Masukan jumlah baris: ");
         row = scan.nextInt();
-        System.out.println("Masukan jumlah kolom: ");
+        System.out.print("Masukan jumlah kolom: ");
         col = scan.nextInt();
         
         this.row = row;
@@ -77,9 +77,11 @@ public class Matrix{
     }
     //CARA PAKAI
     // int n = scan.nextInt();
-    // Matrix m3 = new Matrix(n,n);
+    // Matrix m3 = new Matrix(n,n);   <-- itu create matrix
     // m3 = m3.createIdentitas();
     
+
+    //mengalikan matrix dengan konstanta k
     public void multiplyCons(double k){
         for (int i=0;i<this.row;i++){
             for (int j=0;j<this.col;j++){
@@ -88,6 +90,8 @@ public class Matrix{
         }
     } 
 
+
+    //mengalikan matrix m1 dengan matrix m2.
     public Matrix multiplyMatrix(Matrix m1, Matrix m2){
         Matrix hasil = new Matrix(m1.row,m2.col);
         for (int i=0;i<hasil.row;i++){
@@ -104,6 +108,8 @@ public class Matrix{
     // m4 = m4.multiplyMatrix(m1, m2);
     // m4.displayMatrix();
 
+
+    //mengopy matrix ke matrix mIn.
     public void copyMatrix(Matrix mIn){
         for (int i=0;i<mIn.row;i++){
             for (int j=0;j<mIn.col;j++){
@@ -111,6 +117,7 @@ public class Matrix{
             }
         }
     }
+
 
     //Menjumlahkan m1 dengan m2 (m1+m2)
     //I.S. ukuran m1 dan m2 harus sama
@@ -124,6 +131,7 @@ public class Matrix{
         return hasil;
     }
 
+
     //Mengurangi m1 dengan m2 (m1-m2)
     //I.S. ukuran m1 dan m2 harus sama
     public Matrix substractMatrix(Matrix m1, Matrix m2){
@@ -136,6 +144,8 @@ public class Matrix{
         return hasil;
     }
 
+
+    //menghasilkan transpose dari suatu matrix.
     public Matrix transpose(){
         Matrix tp = new Matrix(this.row, this.col);
         for(int i=0;i<this.row;i++){
@@ -147,10 +157,12 @@ public class Matrix{
     }
 
 
+    //menghasilkan true apabila matrix merupakan square
     public boolean isSquare(){
         return(this.row==this.col);
     }
 
+    //menghasilkan true apabila matrix symetric
     public boolean isSymmetric(){
         if (!isSquare()){
             return false;
@@ -167,7 +179,8 @@ public class Matrix{
          }
     }
     
-    //Cek apakah identitas atau bukan
+
+    //menghasilkan true apabila matrix identitas.
     public boolean isIdentity(){
         if (!isSquare()){
             return false;
@@ -189,6 +202,8 @@ public class Matrix{
         return true;
     }
     
+
+    //menghasilkan true jika matrix m1 sama dengan matrix m2
     public boolean isMatrixEqual(Matrix m1, Matrix m2){
         if ( (m1.row != m2.row) || (m1.col != m2.col) ){
             return false;
@@ -217,44 +232,6 @@ public class Matrix{
         return (this.row * this.col);
     }
  
-    // public Matrix getMinor(Matrix m1,int row, int col){
-    //     Matrix minor = new Matrix(m1.row-1,m1.col-1);
-    //     for(int i=0; i<minor.row;i++){
-    //         for(int j=0; j<minor.col;j++){
-    //             if (i>=row && j<col){
-    //                 minor.m[i][j] = m1.m[i+1][j];
-    //             }
-    //             else if (i>=row && j>=col){
-    //                 minor.m[i][j] = m1.m[i+1][j+1];
-    //             }
-    //             else if (i<row && j>=col){
-    //                 minor.m[i][j] = m1.m[i][j+1];
-    //             }
-    //             else if (i<row && j<col){
-    //                 minor.m[i][j] = m1.m[i][j];
-    //             }
-    //         }
-    //     }
-    // return minor;
-    // }
-
-    // public double determinan(Matrix m1){
-    //     if (m1.row == 1){
-    //         return m1.m[0][0];
-    //     }
-    //     else if (m1.row==2) {
-    //         return ((m1.m[0][0]*m1.m[1][1])-(m1.m[0][1]*m1.m[1][0]));
-    //     }
-
-    //     double hasil =0;
-    //     int sign =1 ;
-      
-    //     for (int i=0; i<m1.col;i++){
-    //         hasil += sign * m1.m[0][i] * m1.determinan(m1.getMinor(m1,0,i));
-    //         sign = -sign;
-    //     }
-    //     return hasil;
-    // }
 }
 
 

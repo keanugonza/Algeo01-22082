@@ -14,7 +14,7 @@ public class Tets {
 
         m1 = Determinan.getMinor(m1, 0, 0);
         double det;
-        det = Determinan.determinan(m1);
+        det = Determinan.determinanKofaktor(m1);
         System.out.println(det);
         m1.displayMatrix();
     

@@ -1,6 +1,9 @@
-package src.App;
-
+package src.Menu;
 import java.util.Scanner;
+
+import src.Method.Gauss_jordan;
+import src.Method.Matrix;
+import src.Method.Gauss;
 
 public class SPLMenu {
     private static Scanner scan = new Scanner(System.in);

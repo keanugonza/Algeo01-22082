@@ -1,6 +1,7 @@
-package src.App;
+package src.Menu;
 
 import java.util.Scanner;
+import src.Method.Matrix;
 import java.lang.Math;
 
 public class InterpolasiMenu {

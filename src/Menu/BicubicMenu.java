@@ -1,4 +1,4 @@
-package src.App;
+package src.Menu;
 
 import java.util.Scanner;
 import java.lang.Math;

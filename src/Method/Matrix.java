@@ -401,6 +401,10 @@ public class Matrix{
         System.out.println("Masukkan matriks:");
         this.readMatrix();
     }
+
+    public static Matrix eadFile(String fileName) {
+        return null;
+    }
  
 }
 

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Matrix{
@@ -303,6 +304,102 @@ public class Matrix{
                     filewriter.close();
             }
         }
+    }
+
+    public Matrix kofaktor(Matrix m1){
+        Matrix result = new Matrix(m1.col, m1.row);
+        double determinan;
+        Matrix matrixTemp;
+        for (int i = 0; i < m1.row; i++){
+            for (int j = 0; j < m1.col; j++){
+                matrixTemp = Determinan.getMinor(m1, i, j);
+                determinan = Determinan.determinanKofaktor(matrixTemp);
+                if ((i + j) % 2 == 0){
+                    result.m[i][j] = determinan;
+                } else {
+                    result.m[i][j] = determinan * -1;
+                }
+            }
+        }
+        return result;
+    }
+    public Matrix adjoint(Matrix m1){
+        Matrix result = new Matrix(m1.col, m1.row);
+        Matrix matrixKofaktor = new Matrix(m1.col, m1.row);
+        matrixKofaktor = kofaktor(m1);
+        result = matrixKofaktor.transpose();
+        
+        return result;
+    }
+
+    public static Matrix mergeMatrix(Matrix m1, Matrix m2){
+        Matrix result = new Matrix(m1.row, m1.col + m2.col);
+        for (int i = 0; i < result.row; i++){
+            for (int j = 0; j < m1.col; j++){
+                result.m[i][j] = m1.m[i][j];
+            }
+            for (int k = m1.col; k < result.col; k++){
+                result.m[i][k] = m2.m[i][k - m1.col];
+            }
+        }
+
+        return result;
+    }
+
+    public void addRow(Matrix m1, int row1, int row2, double l){
+        for (int i = 0; i < m1.col; i++){
+            m1.m[row1][i] += l * m1.m[row2][i];
+        }
+    }
+
+    public Matrix buatIdentitas(int k){
+        Matrix ident = new Matrix(k, k);
+        for (int i = 0; i < k; i++) {
+            for (int j = 0; j < k; j++) {
+                if (i == j) {
+                    ident.m[i][j] = 1;
+                } else {
+                    ident.m[i][j] = 0;
+                }
+            }
+        }
+        return ident;
+    }
+
+    public void splitMatrix(Matrix m1, Matrix m2, int col){
+        m1.row = this.row;
+        m2.row = this.row;
+        m1.col = col;
+        m2.col = this.col - m1.col;
+        m1.m = new double[m1.row][m1.col];
+        m2.m = new double[m2.row][m2.col];
+        for (int i = 0; i < this.row; i++){
+            for (int j = 0; j < col; j++){
+                m1.m[i][j] = this.m[i][j];
+            }
+        }
+        for (int i = 0; i < this.row; i++){
+            int k = 0;
+            for (int j = col; j < this.col; j++){
+                m2.m[i][k] = this.m[i][j];
+                k++;
+            }
+        }
+    }
+
+    public void inputSquareMatrix() {
+        int n = 0;
+        System.out.print("Input harus berupa matriks segiempat dengan ukuran n x n. Masukkan n: ");
+        try {
+            n = scan.nextInt();
+        } catch (InputMismatchException e) {
+            e.printStackTrace();
+        }
+        this.row = n;
+        this.col = n;
+        this.m = new double[this.row][this.col];
+        System.out.println("Masukkan matriks:");
+        this.readMatrix();
     }
  
 }

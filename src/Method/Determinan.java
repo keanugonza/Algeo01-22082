@@ -25,7 +25,7 @@ public class Determinan {
     return minor;
     }
 
-    //menghasilkan determinan dari sebuah matrix.
+    //menghasilkan determinan dari matrix dengan cara kofaktor.
     public static double determinanKofaktor(Matrix m1){
         if (m1.row == 1){
             return m1.m[0][0];
@@ -42,5 +42,44 @@ public class Determinan {
             sign = -sign;
         }
         return hasil;
+    }
+
+    //menghasilkan determinan dari matrix dengan cara eliminasi baris
+    public static double determinanGauss(Matrix m1){
+        double det = -1;
+        int r_now = 0, c_now = 0, i;
+
+
+        while(r_now < m1.row && c_now < m1.col){
+            int a;
+            boolean end = false;
+            while (end == false){
+                for(a=r_now;a< m1.row;a++){
+                    if (m1.m[a][c_now] != 0){
+                        det *= -1;
+                        Gauss.swap(m1, r_now, a);
+                        end = true;
+                    }
+                }
+                end = true;
+            }
+            
+            if (m1.m[r_now][c_now] != 0 ){
+                det *= (m1.m[r_now][c_now]);
+                Gauss.multi(m1, r_now, 1/m1.m[r_now][c_now]);
+            }
+            for (i = r_now + 1; i < m1.row; i++){
+                Gauss.add(m1, i, r_now, -m1.m[i][c_now]);
+            }
+            r_now++;
+            c_now++;
+            
+        }
+        if (Math.ceil(det)-det > 0.5){
+            return Math.floor(det);
+        }
+        else{
+            return Math.ceil(det);
+        }
     }
 }

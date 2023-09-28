@@ -1,6 +1,6 @@
 package src.Method;
 
-class Gauss {
+public class Gauss {
     public static Matrix add(Matrix n, int f, int s, double x){
         int i, col = n.col;
         for (i=0;i<col;i++){

@@ -1,3 +1,5 @@
+package src.Method;
+
 class Gauss {
     public static Matrix add(Matrix n, int f, int s, double x){
         int i, col = n.col;

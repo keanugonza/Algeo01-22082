@@ -1,5 +1,9 @@
 package src.Method;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Matrix{
@@ -75,10 +79,6 @@ public class Matrix{
         }
         return identitas;
     }
-    //CARA PAKAI
-    // int n = scan.nextInt();
-    // Matrix m3 = new Matrix(n,n);   <-- itu create matrix
-    // m3 = m3.createIdentitas();
     
 
     //mengalikan matrix dengan konstanta k
@@ -103,10 +103,6 @@ public class Matrix{
         }
         return hasil;
     }
-    //CARA PAKAI
-    // Matrix m4 = new Matrix(m1.row,m2.col);
-    // m4 = m4.multiplyMatrix(m1, m2);
-    // m4.displayMatrix();
 
 
     //mengopy matrix ke matrix mIn.
@@ -150,7 +146,7 @@ public class Matrix{
         Matrix tp = new Matrix(this.row, this.col);
         for(int i=0;i<this.row;i++){
             for (int j=0;j<this.col;j++){
-                tp.m[i][j] = this.m[i][j];
+                tp.m[i][j] = this.m[j][i];
             }
          }
          return tp;
@@ -203,7 +199,7 @@ public class Matrix{
     }
     
 
-    //menghasilkan true jika matrix m1 sama dengan matrix m2
+    //menghasilkan true jika semuau elemen matrix m1 sama dengan matrix m2
     public boolean isMatrixEqual(Matrix m1, Matrix m2){
         if ( (m1.row != m2.row) || (m1.col != m2.col) ){
             return false;
@@ -220,16 +216,93 @@ public class Matrix{
          }
     }
 
+    //menghasilkan true jika elemen matrix m1 tidak sama dengan matrix m2.
     public boolean isMatrixNotEqual(Matrix m1, Matrix m2){
         return (!isMatrixEqual(m1, m2));
     }
 
+    //menghasilkan true jika size matrix m1 sama dengan size matrix m2.
     public boolean isMatrixSizeEqual(Matrix m1, Matrix m2){
         return ((m1.row == m2.row) && (m1.col == m2.col));
      }
     
+    //menghasilkan jumlah elemen pada sebuah matrix
     public int countElmt(){
         return (this.row * this.col);
+    }
+
+    //membaca sebuah file lalu memasukannya ke dalam matrix.
+    public static Matrix fileToMatrix(String fileName) throws FileNotFoundException{
+        File file  = new File(fileName);
+        Scanner inputFile = new Scanner(file);
+        
+        int countRow , countCol;
+        int i = 0;
+        countRow = 0;
+        countCol = 0;
+
+        //mencari banyak baris dan kolom terlebih dahulu
+        while(inputFile.hasNextLine()){
+            String[] value = inputFile.nextLine().split(" ", -1);
+            countCol = Math.max(countCol, value.length);
+            countRow++;
+        }
+        inputFile.close();
+        
+
+        
+        Matrix m1 = new Matrix(countRow,countCol); //membuat matrix kosong
+        
+        //mengisi ke matrix m1
+        inputFile = new Scanner(file);
+        while(inputFile.hasNextLine()){
+            String[] value = inputFile.nextLine().split(" ",-1);
+            if (value.length == countCol){ 
+                for(int j=0;j<countCol;j++){
+                    m1.m[i][j] = Double.parseDouble(value[j]);
+                }
+            }
+            else{ //untuk mengatasi kasus pada file pada interpolasi dan bicubic
+                for(int j=0;j<value.length;j++){
+                m1.m[i][j] = Double.parseDouble(value[j]);
+                }
+            }
+            i++;
+        }
+        inputFile.close();
+        return m1;
+    }
+
+
+    //menyimpan matix kedalam file
+    public static void saveMatrix(Matrix m1) throws IOException{
+        System.out.println("Save hasil ke file? (Y/N)");
+        try (Scanner scan = new Scanner(System.in)) {
+            String save = (scan.nextLine()).toUpperCase();
+            
+            switch (save) {
+                case "N":
+                    System.out.println("Hasil tidak tersimpan");
+                    break;
+                case "Y":
+                System.out.println("Masukan nama file:");
+                    String file_name = scan.nextLine();
+
+                    File File = new File(file_name);
+                    if(!(File.exists())){
+                        File.createNewFile();
+                    }
+
+                    FileWriter filewriter = new FileWriter(file_name);
+                    for(int i=0;i<m1.row;i++){
+                        for(int j=0;j<m1.row;j++){
+                            filewriter.write(String.format("%.4f ", m1.m[i][j]));
+                        }
+                        filewriter.write("\n");
+                    }
+                    filewriter.close();
+            }
+        }
     }
  
 }

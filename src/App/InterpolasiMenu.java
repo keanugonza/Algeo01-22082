@@ -1,4 +1,4 @@
-package src.Method;
+package src.App;
 
 import java.util.Scanner;
 import java.lang.Math;

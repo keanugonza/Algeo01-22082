@@ -47,7 +47,7 @@ public class Matrix{
     //I.S. Baris dan Kolom sudah terdefinisi. 
     public void readMatrix(){
         System.out.println("Masukan Matrix: ");
-        for(int i=0;i<this.row;i++){
+        for(int i=0; i<this.row; i++){
             for(int j=0;j<this.col;j++){
                 this.m[i][j] = scan.nextDouble();
             }
@@ -56,7 +56,7 @@ public class Matrix{
 
     //Menampilkan matriks dengan type double 4 angka dibelakang koma
     public void displayMatrix(){
-        for(int i=0;i<this.row;i++){
+        for(int i=0;i<this.row; i++){
             for(int j=0;j<this.col;j++){
                 System.out.printf("%.4f ", this.m[i][j]);
             }
@@ -276,35 +276,78 @@ public class Matrix{
 
 
     //menyimpan matix kedalam file
-    public static void saveMatrix(Matrix m1) throws IOException{
-        System.out.println("Save hasil ke file? (Y/N)");
-        try (Scanner scan = new Scanner(System.in)) {
-            String save = (scan.nextLine()).toUpperCase();
-            
-            switch (save) {
-                case "N":
-                    System.out.println("Hasil tidak tersimpan");
-                    break;
-                case "Y":
-                System.out.println("Masukan nama file:");
-                    String file_name = scan.nextLine();
+    public static void saveMatrix(Matrix m1){
+        System.out.println("Save hasil ke file (Y/N)?");
+        String save = (scan.next()).toUpperCase();
+        
+        switch (save) {
+            case "N":
+                System.out.println("Matrix tidak tersimpan");
+                break;
 
-                    File File = new File(file_name);
-                    if(!(File.exists())){
+            case "Y":
+            System.out.println("Masukan nama file:");
+                String file_name = scan.next();
+                File File = new File(file_name);
+                if(!(File.exists())){
+                    try {
                         File.createNewFile();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
+                }
 
-                    FileWriter filewriter = new FileWriter(file_name);
+                try (FileWriter filewriter = new FileWriter(file_name)){
                     for(int i=0;i<m1.row;i++){
                         for(int j=0;j<m1.row;j++){
                             filewriter.write(String.format("%.4f ", m1.m[i][j]));
                         }
-                        filewriter.write("\n");
+                    filewriter.write("\n");
                     }
-                    filewriter.close();
-            }
+                    System.out.println("Matrix sudah tersimpan di dalam file. ");
+                }
+                catch (IOException e){
+                    System.out.println("Matrix GAGAL tersimpan.");
+                }
+                break;
         }
     }
+
+    //Menyimpan String kedalam file.
+    public static void saveString(String s){
+        System.out.println("Save hasil ke file (Y/N)?");
+        String save = (scan.next()).toUpperCase();
+        
+        switch (save) {
+            case "N":
+                System.out.println("Hasil tidak tersimpan");
+                break;
+
+            case "Y":
+            System.out.println("Masukan nama file:");
+                String file_name = scan.next();
+                File File = new File(file_name);
+                if(!(File.exists())){
+                    try {
+                        File.createNewFile();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                try (FileWriter filewriter = new FileWriter(file_name)){
+                    filewriter.write(s);
+                    filewriter.write("\n");
+                    System.out.println("Hasil sudah tersimpan di dalam file. ");
+                }
+                catch (IOException e){
+                    System.out.println("Hasil GAGAL tersimpan.");
+                }
+                break;
+        }
+    }
+    //CONTOH PEMAAKAIAN BISA LIAT DI determinanMenu.java
+
 
     public Matrix kofaktor(Matrix m1){
         Matrix result = new Matrix(m1.col, m1.row);

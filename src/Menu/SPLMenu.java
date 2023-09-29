@@ -154,48 +154,6 @@ public class SPLMenu {
         result = Cramer.cramer(m1);
         System.out.println(result);
     }
-    // public static void main(String[] args){
-    //     Matrix m1 = new Matrix(0, 0);
-    //     int method, masukan;
-    //     System.out.println("""
-    //     SISTEM PERSAMAAN LINEAR
-    //     Pilih jenis masukan:    
-    //     1. Keyboard
-    //     2. File
-    //     """
-    //     );
-    //     masukan = scan.nextInt();
-    //     if (masukan == 1){
-    //         m1.inputRowCol();
-    //         m1.readMatrix();
-    //         System.out.println("Masukkan matriks persamaan: ");
-    //     } else {
-    //         try (Scanner scan = new Scanner(System.in)) {
-    //             System.out.println("Input nama file anda : ");    
-    //             String fileName = scan.nextLine();
-    //             m1 = Matrix.fileToMatrix(fileName);
-    //         } catch (FileNotFoundException e) {
-    //             e.printStackTrace();
-    //         }
-    //     }
-    //     System.out.println("""
-    //     Pilih metode penyelesaian:
-    //     1. Metode eliminasi Gauss
-    //     2. Metode eliminasi Gauss-Jordan
-    //     3. Metode matriks balikan
-    //     4. Kaidah Cramer
-    //     """);
-    //     method = scan.nextInt();
-    //     if (method == 1){
-    //         splGauss(m1);
-    //     } else if (method == 2){
-    //         splGaussJordan(m1);
-    //     } else if (method == 3){
-    //         splInversBalikan(m1);
-    //     } else if (method == 4){
-    //         splCramer(m1);
-    //     }
-    // }
 
     public static void menu() throws FileNotFoundException {
         System.out.println();

@@ -46,7 +46,7 @@ public class Determinan {
 
     //menghasilkan determinan dari matrix dengan cara eliminasi baris
     public static double determinanGauss(Matrix m1){
-        double det = -1;
+        double det = 1;
         int r_now = 0, c_now = 0, i;
 
 
@@ -56,9 +56,11 @@ public class Determinan {
             while (end == false){
                 for(a=r_now;a< m1.row;a++){
                     if (m1.m[a][c_now] != 0){
-                        det *= -1;
                         Gauss.swap(m1, r_now, a);
                         end = true;
+                        if (r_now != a){
+                            det *= -1;
+                        }
                     }
                 }
                 end = true;

@@ -398,7 +398,6 @@ public class Matrix{
         this.row = n;
         this.col = n;
         this.m = new double[this.row][this.col];
-        System.out.println("Masukkan matriks:");
         this.readMatrix();
     }
 

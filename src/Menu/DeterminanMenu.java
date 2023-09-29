@@ -1,7 +1,6 @@
 package src.Menu;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 
 import src.Method.Determinan;
@@ -9,7 +8,7 @@ import src.Method.Matrix;
 
 public class DeterminanMenu {
     private static Scanner scan = new Scanner(System.in);
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args){
         System.out.println("=================== MENU DETRMINAN ===================");
         System.out.print("\n");
         System.out.println("1. Keyboard");

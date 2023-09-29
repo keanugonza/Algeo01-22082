@@ -165,6 +165,7 @@ public class RLBMenu {
             default:
                 inputValid = false;
                 System.out.println("Input anda kurang tepat. Mohon masukkan 1 atau 2.\n");
+                menu();
         }
         if (inputValid) {
             inputMat = toRLB(inputMat);

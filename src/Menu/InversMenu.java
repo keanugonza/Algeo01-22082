@@ -17,10 +17,16 @@ public class InversMenu {
         System.out.println("Masukkan pilihan input (1/2): ");
         int fromFile = scan.nextInt();
         System.out.println();
+        switch (fromFile) {
+            default :
+                System.out.println("Input tidak dikenali. Mohon hanya masukkan 1 atau 2.");
+                fromFile = scan.nextInt();
+        } 
         if (fromFile == 1) {
             return false;
+        } else {
+            return true;
         }
-        return true;
     }
 
     public static void menu() throws FileNotFoundException {
@@ -64,6 +70,7 @@ public class InversMenu {
             default:
             inputValid = false;
             System.out.println("Input tidak dikenali. Mohon hanya masukkan 1 atau 2.\n");
+            menu();
         }
         if (inputValid) {
             if (m != null) {

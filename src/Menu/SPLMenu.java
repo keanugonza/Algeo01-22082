@@ -141,12 +141,23 @@ public class SPLMenu {
         Matrix matrixEq = new Matrix(0, 0);
         m1.splitMatrix(matrixMain, matrixEq, m1.col - 1);
         matrixMain = Invers.inversAdjoint(matrixMain);
-        hasil = hasil.multiplyMatrix(matrixMain, matrixEq);
-        for (j = 0; j < hasil.row; j++){
-            result += ("x" + (j + 1) + " = " + String.format("%.4f", hasil.m[j][0]) + "\n");
+        if (matrixMain != null) {
+            System.out.println();
+            System.out.println("Matriks balikan: ");
+            matrixMain.displayMatrix();
+            hasil = hasil.multiplyMatrix(matrixMain, matrixEq);
+            for (j = 0; j < hasil.row; j++){
+                result += ("x" + (j + 1) + " = " + String.format("%.4f", hasil.m[j][0]) + "\n");
+            }
+            System.out.println(result);
+            // Utils.matrixToFile(m);
+        } else {
+            result = "Matriks tidak memiliki balikan sehingga tidak bisa diselesaikan";
+            System.out.println();
+            System.out.println(result);
+            // Utils.stringToFile(result);
         }
-
-        System.out.println(result);
+        
     }
 
     public static void splCramer(Matrix m1){
@@ -185,8 +196,10 @@ public class SPLMenu {
             default:
                 inputValid = false;
                 System.out.println("Input anda kurang tepat. Mohon masukkan 1 atau 2.\n");
+                menu();
         }
-        System.out.println("""
+        if (inputValid) {
+            System.out.println("""
         Pilih metode penyelesaian:
         1. Metode eliminasi Gauss
         2. Metode eliminasi Gauss-Jordan
@@ -194,16 +207,20 @@ public class SPLMenu {
         4. Kaidah Cramer
         """);
         method = scan.nextInt();
-        if (inputValid) {
-            if (method == 1){
-                splGauss(inputMat);
-            } else if (method == 2){
-                splGaussJordan(inputMat);
-            } else if (method == 3){
-                splInversBalikan(inputMat);
-            } else if (method == 4){
-                splCramer(inputMat);
-            }
+        switch (method){
+            default :
+            System.out.println("Input anda kurang tepat. Mohon masukkan 1, 2, 3, atau 4.\n");
+            method = scan.nextInt();
+        }
+        if (method == 1){
+            splGauss(inputMat);
+        } else if (method == 2){
+            splGaussJordan(inputMat);
+        } else if (method == 3){
+            splInversBalikan(inputMat);
+        } else if (method == 4){
+            splCramer(inputMat);
+        }
         }
     }
 }

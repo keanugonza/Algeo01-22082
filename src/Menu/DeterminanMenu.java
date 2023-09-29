@@ -1,6 +1,7 @@
 package src.Menu;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 import src.Method.Determinan;
@@ -8,7 +9,7 @@ import src.Method.Matrix;
 
 public class DeterminanMenu {
     private static Scanner scan = new Scanner(System.in);
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException{
         System.out.println("=================== MENU DETRMINAN ===================");
         System.out.print("\n");
         System.out.println("1. Keyboard");
@@ -44,6 +45,11 @@ public class DeterminanMenu {
                 }
                 System.out.print("\n");
                 System.out.println("Determinan dari matrix tersebut: " + hasilk);
+
+                System.out.print("\n");
+                String s = "Hasil determinannya: ";
+                s = s+ (String.format("%.4f", hasilk));
+                Matrix.saveString(s);
                 break;
                 
             case 2:
@@ -72,11 +78,18 @@ public class DeterminanMenu {
                     }
                     System.out.print("\n");
                     System.out.print("Determinan dari matrix tersebut: " + hasilf);
+
+                    System.out.print("\n");
+                    String s1 = "Hasil determinannya: ";
+                    s1 = s1+ (String.format("%.4f", hasilf));
+                    Matrix.saveString(s1);
+
                 } catch (FileNotFoundException e) {
                     System.out.println("Tidak ditemukan file.");
                 }
                 break;         
         }
+
         
     }
 }

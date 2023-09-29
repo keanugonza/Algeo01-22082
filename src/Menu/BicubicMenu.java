@@ -97,13 +97,17 @@ public class BicubicMenu {
     }
 
 
-    public static void bikubik() throws FileNotFoundException{
+    public static void bikubik(){
         int i, x=0, y=0;
         double a, b, hasil = 0;
         Matrix fromFile = new Matrix(0, 0);
         Matrix f = new Matrix(16, 16);
-        String namaFile = scan.nextLine();
-        fromFile = Matrix.fileToMatrix(namaFile);
+        String namaFile = scan.next();
+        try {
+            fromFile = Matrix.fileToMatrix(namaFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         a = fromFile.m[4][0];
         b = fromFile.m[4][1];
@@ -127,6 +131,7 @@ public class BicubicMenu {
                 y = 0;
             }
         }
+
         Matrix tambahan = new Matrix(16,1);
         int j,p = 0;
         for(i=0;i<4;i++){
@@ -135,20 +140,23 @@ public class BicubicMenu {
                 p++;
             }
         }
-        f.displayMatrix();
+
         Matrix M_final = new Matrix(0, 0);
         double[] l_constA = new double[16], l_final = new double[16];
+
         M_final = Matrix.mergeMatrix(f, tambahan);
-        M_final.displayMatrix();
         l_constA = splGaussBicubic(M_final);
         l_final = fungsi1(a, b);
-        for (i=0;i<16;i++){
-            System.out.println(l_final[i]);
-        }
+
         for(i=0;i<16;i++){
             hasil += l_constA[i]*l_final[i];
         }
         System.out.println(hasil);
+
+        System.out.print("\n");
+        String s1 = "f(";
+        s1 = s1 + (String.format("%4f", a)) + "," + (String.format("%4f", b)) + ") = " + (String.format("%4f", hasil));
+        Matrix.saveString(s1);
     }
 
     public static void main(String[] args) throws FileNotFoundException{

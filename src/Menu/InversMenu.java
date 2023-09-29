@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import src.Method.Invers;
 import src.Method.Matrix;
-// import Utils.Utils;
 
 public class InversMenu {
     private static Scanner scan = new Scanner(System.in);
@@ -40,9 +39,11 @@ public class InversMenu {
         switch (opt) {
             case 1:
                 if (fromFile()){
-                    System.out.print("Masukan nama file:");
-                    String namaFile = scan.nextLine();
-                    m = Matrix.fileToMatrix(namaFile);
+                    try (Scanner scan = new Scanner(System.in)) {
+                        System.out.println("Input nama file anda : ");    
+                        String fileName = scan.nextLine();
+                        m = Matrix.fileToMatrix(fileName);
+                    }
                 } else {
                     m.inputSquareMatrix();
                 }
@@ -50,9 +51,11 @@ public class InversMenu {
                 break;
             case 2:
                 if (fromFile()){
-                    System.out.print("Masukan nama file:");
-                    String namaFile = scan.nextLine();
-                    m = Matrix.fileToMatrix(namaFile);
+                    try (Scanner scan = new Scanner(System.in)) {
+                        System.out.println("Input nama file anda : ");    
+                        String fileName = scan.nextLine();
+                        m = Matrix.fileToMatrix(fileName);
+                    }
                 } else {
                     m.inputSquareMatrix();
                 }

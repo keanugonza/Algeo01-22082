@@ -141,11 +141,23 @@ public class SPLMenu {
         Matrix matrixEq = new Matrix(0, 0);
         m1.splitMatrix(matrixMain, matrixEq, m1.col - 1);
         matrixMain = Invers.inversAdjoint(matrixMain);
-        hasil = hasil.multiplyMatrix(matrixMain, matrixEq);
-        for (j = 0; j < hasil.row; j++){
-            result += ("x" + (j + 1) + " = " + String.format("%.4f", hasil.m[j][0]) + "\n");
+        if (matrixMain != null) {
+            System.out.println();
+            System.out.println("Matriks balikan: ");
+            matrixMain.displayMatrix();
+            hasil = hasil.multiplyMatrix(matrixMain, matrixEq);
+            for (j = 0; j < hasil.row; j++){
+                result += ("x" + (j + 1) + " = " + String.format("%.4f", hasil.m[j][0]) + "\n");
+            }
+            System.out.println(result);
+            // Utils.matrixToFile(m);
+        } else {
+            result = "Matriks tidak memiliki balikan sehingga tidak bisa diselesaikan";
+            System.out.println();
+            System.out.println(result);
+            // Utils.stringToFile(result);
         }
-        System.out.println(result);
+        
     }
 
     public static void splCramer(Matrix m1){
@@ -153,31 +165,41 @@ public class SPLMenu {
         result = Cramer.cramer(m1);
         System.out.println(result);
     }
-    public static void main(String[] args){
-        Matrix m1 = new Matrix(0, 0);
-        int method, masukan;
-        System.out.println("""
-        SISTEM PERSAMAAN LINEAR
-        Pilih jenis masukan:    
-        1. Keyboard
-        2. File
-        """
-        );
-        masukan = scan.nextInt();
-        if (masukan == 1){
-            m1.inputRowCol();
-            m1.readMatrix();
-            System.out.println("Masukkan matriks persamaan: ");
-        } else {
-            try (Scanner scan = new Scanner(System.in)) {
+
+    public static void menu() throws FileNotFoundException {
+        System.out.println();
+        System.out.println("Sistem Persamaan Linear");
+        System.out.println("1. Keyboard input");
+        System.out.println("2. File input");
+        System.out.print("Masukkan pilihan input: ");
+        int opt = 0;
+        int method;
+        boolean inputValid = true;
+        Matrix inputMat = new Matrix(0, 0);
+        try {
+            opt = scan.nextInt();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println();
+        switch(opt) {
+            case 1:
+                inputMat.inputRowCol();
+                inputMat.readMatrix();
+                break;
+            case 2:
+                Scanner scan = new Scanner(System.in);
                 System.out.println("Input nama file anda : ");    
                 String fileName = scan.nextLine();
-                m1 = Matrix.fileToMatrix(fileName);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+                inputMat = Matrix.fileToMatrix(fileName);
+                break;
+            default:
+                inputValid = false;
+                System.out.println("Input anda kurang tepat. Mohon masukkan 1 atau 2.\n");
+                menu();
         }
-        System.out.println("""
+        if (inputValid) {
+            System.out.println("""
         Pilih metode penyelesaian:
         1. Metode eliminasi Gauss
         2. Metode eliminasi Gauss-Jordan
@@ -185,14 +207,20 @@ public class SPLMenu {
         4. Kaidah Cramer
         """);
         method = scan.nextInt();
+        switch (method){
+            default :
+            System.out.println("Input anda kurang tepat. Mohon masukkan 1, 2, 3, atau 4.\n");
+            method = scan.nextInt();
+        }
         if (method == 1){
-            splGauss(m1);
+            splGauss(inputMat);
         } else if (method == 2){
-            splGaussJordan(m1);
+            splGaussJordan(inputMat);
         } else if (method == 3){
-            splInversBalikan(m1);
+            splInversBalikan(inputMat);
         } else if (method == 4){
-            splCramer(m1);
+            splCramer(inputMat);
+        }
         }
     }
 }

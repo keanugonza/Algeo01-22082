@@ -324,7 +324,7 @@ public class Matrix{
                 break;
 
             case "Y":
-            System.out.println("Masukan nama file:");
+            System.out.print("Masukan nama file: ");
                 String file_name = scan.next();
                 File File = new File(file_name);
                 if(!(File.exists())){

@@ -4,7 +4,7 @@ public class Gauss_jordan {
     public static int getFirstOne(Matrix n, int row){
         int i = 0, index = 0;
         boolean found = false;
-        while (i < n.col && found == false){
+        while (i < n.col-1 && found == false){
             if (n.m[row][i] == 1){
                 index = i;
                 found = true;
@@ -14,21 +14,14 @@ public class Gauss_jordan {
         return index;
     }
 
-    public static Matrix eliminasiGaussJordan(Matrix n, boolean x){
-        n = Gauss.eliminasiGauss(n, x);
-        int max_c = n.col;
-        if (x == true){
-            max_c -= 1;
-        }
-        int i,row = 1, col =0;
-        while(row < max_c){
-            col = getFirstOne(n, row);
-            for (i = 0; i < row; i++){
-                Gauss.add(n, i, row, -n.m[i][col]);
+    public static Matrix eliminasiGaussJordan(Matrix m1, boolean x){
+        m1 = Gauss.eliminasiGauss(m1, x);
+        for (int i = 0; i < m1.row ; i++){
+            for (int j = i+1; j < m1.row ; j++){
+                Gauss.add(m1, i, j, -m1.m[i][Gauss_jordan.getFirstOne(m1,j)]);
             }
-            row++;
         }
-        return n;
+        return m1;
     }
 
     public static void main(String[] args){

@@ -98,6 +98,7 @@ public class BicubicMenu {
 
 
     public static void bikubik(){
+        boolean file = true;
         int i, x=0, y=0;
         double a, b, hasil = 0;
         Matrix fromFile = new Matrix(0, 0);
@@ -107,9 +108,12 @@ public class BicubicMenu {
         try {
             fromFile = Matrix.fileToMatrix(namaFile);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Tidak ditemukan file.");
+            file = false;
         }
 
+
+        if (file){
         a = fromFile.m[4][0];
         b = fromFile.m[4][1];
 
@@ -160,5 +164,6 @@ public class BicubicMenu {
         String s1 = "f(";
         s1 = s1 + (String.format("%2f", a)) + "," + (String.format("%2f", b)) + ") = " + (String.format("%4f", hasil));
         Matrix.saveString(s1);
+        }
     }
 }

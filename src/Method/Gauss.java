@@ -38,7 +38,6 @@ public class Gauss {
 
     public static Matrix multi(Matrix n, int row, double x){
         int i;
-        double s;
         for(i = 0; i < n.col;i++){
             n.m[row][i] = rounding(n.m[row][i] *= x);
         }

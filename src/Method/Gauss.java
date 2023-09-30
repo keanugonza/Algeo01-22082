@@ -68,16 +68,13 @@ public class Gauss {
         while(row < max_r && col < max_c){
             r_now = row;
             first(n, row, col);
-            System.out.println(1);
             s = n.m[r_now][col];
             if (s != 0){
                 multi(n, r_now, 1/s);
             }
-            System.out.println(2);
             for (i = r_now + 1; i < n.row; i++){
                 add(n, i, r_now, -n.m[i][col]);
             }
-            System.out.println(3);
             row++;
             col++;
         }

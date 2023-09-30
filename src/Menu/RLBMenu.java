@@ -36,7 +36,7 @@ public class RLBMenu {
     
     public static void fileToMatrix2(Matrix input, Matrix x) throws FileNotFoundException{
         String fileName = new String();
-        System.out.print("Masukan nama file:");
+        System.out.print("Masukan nama path file:");
         fileName = scan.next();
         File file  = new File(fileName);
         Scanner inputFile = new Scanner(file);

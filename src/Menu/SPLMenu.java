@@ -219,7 +219,7 @@ public class SPLMenu {
                 break;
             case 2:
                 Scanner scan = new Scanner(System.in);
-                System.out.println("Input nama file anda : ");    
+                System.out.println("Input nama path file anda : ");    
                 String fileName = scan.nextLine();
                 inputMat = Matrix.fileToMatrix(fileName);
                 break;

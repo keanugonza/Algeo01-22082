@@ -53,7 +53,7 @@ public class DeterminanMenu {
                 
             case 2:
                 System.out.print("\n");
-                System.out.print("Masukan nama file:");
+                System.out.print("Masukan nama path file:");
                 String namaFile = scan.next();
                 try{
                     m1 = Matrix.fileToMatrix(namaFile);

@@ -13,9 +13,9 @@ public class Gauss {
             }
         } else if (Math.abs(1-(n%1)) < x){
             if (n<0){
-                n += (n%1);
+                n -= (1-(n%1));
             } else{
-                n -= (n%1);
+                n += (1-(n%1));
             }
         }
         return n;

@@ -102,6 +102,7 @@ public class BicubicMenu {
         double a, b, hasil = 0;
         Matrix fromFile = new Matrix(0, 0);
         Matrix f = new Matrix(16, 16);
+        System.out.print("Masukan nama path file: ");
         String namaFile = scan.next();
         try {
             fromFile = Matrix.fileToMatrix(namaFile);
@@ -147,7 +148,9 @@ public class BicubicMenu {
         M_final = Matrix.mergeMatrix(f, tambahan);
         l_constA = splGaussBicubic(M_final);
         l_final = fungsi1(a, b);
-
+        for(i=0;i<16;i++){
+            System.out.println(l_constA[i]);
+        }
         for(i=0;i<16;i++){
             hasil += l_constA[i]*l_final[i];
         }
@@ -155,7 +158,7 @@ public class BicubicMenu {
 
         System.out.print("\n");
         String s1 = "f(";
-        s1 = s1 + (String.format("%4f", a)) + "," + (String.format("%4f", b)) + ") = " + (String.format("%4f", hasil));
+        s1 = s1 + (String.format("%2f", a)) + "," + (String.format("%2f", b)) + ") = " + (String.format("%4f", hasil));
         Matrix.saveString(s1);
     }
 }

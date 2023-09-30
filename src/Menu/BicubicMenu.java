@@ -158,8 +158,4 @@ public class BicubicMenu {
         s1 = s1 + (String.format("%4f", a)) + "," + (String.format("%4f", b)) + ") = " + (String.format("%4f", hasil));
         Matrix.saveString(s1);
     }
-
-    public static void main(String[] args) throws FileNotFoundException{
-        bikubik();
-    }
 }

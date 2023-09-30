@@ -77,11 +77,9 @@ public class Determinan {
             c_now++;
             
         }
-        if (Math.ceil(det)-det > 0.5){
-            return Math.floor(det);
-        }
-        else{
-            return Math.ceil(det);
-        }
+        double hasil =0;
+        hasil = Gauss.rounding(det);
+        return hasil;
+
     }
 }

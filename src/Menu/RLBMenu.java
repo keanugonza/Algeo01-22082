@@ -98,7 +98,9 @@ public class RLBMenu {
         if (x.col != 0){
             System.out.println(result);
         }
-        System.out.println("Hasil estimasi untuk input anda adalah " + estimationValue);
+        result += ("\nHasil estimasi untuk input anda adalah " + estimationValue);
+        System.out.println(result);
+        Matrix.saveString(result);
     }
 
     public static void output2RLB(Matrix m1) {
@@ -133,6 +135,7 @@ public class RLBMenu {
             result = "Kaidah cramer tidak berlaku untuk input. Coba metode lain.\n";
         }
         System.out.println(result);
+        Matrix.saveString(result);
     }
 
 

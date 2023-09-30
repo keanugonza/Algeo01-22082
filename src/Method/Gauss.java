@@ -1,10 +1,30 @@
 package src.Method;
 
 public class Gauss {
+    public static double rounding(double n){
+        double x = Math.pow(10, -8), y = Math.abs(n)-Math.abs(n%1);
+        if (y==0 && (Math.abs(n % 1) < x || Math.abs(1-(n%1)) < x)){
+            n = 0;
+        } else if (Math.abs(n % 1) < x){
+            if (n<0){
+                n += (n%1);
+            } else{
+                n -= (n%1);
+            }
+        } else if (Math.abs(1-(n%1)) < x){
+            if (n<0){
+                n += (n%1);
+            } else{
+                n -= (n%1);
+            }
+        }
+        return n;
+    }
+
     public static Matrix add(Matrix n, int f, int s, double x){
         int i, col = n.col;
         for (i=0;i<col;i++){
-            n.m[f][i] += n.m[s][i]*x;
+            n.m[f][i] = rounding(n.m[f][i] += n.m[s][i]*x);
         }
         return n;
     }
@@ -18,8 +38,9 @@ public class Gauss {
 
     public static Matrix multi(Matrix n, int row, double x){
         int i;
+        double s;
         for(i = 0; i < n.col;i++){
-            n.m[row][i] = n.m[row][i]*x;
+            n.m[row][i] = rounding(n.m[row][i] *= x);
         }
         return n;
     }
@@ -40,14 +61,16 @@ public class Gauss {
 
     public static Matrix eliminasiGauss(Matrix n, boolean x){
         int row = 0, col = 0, r_now, i, max_r = n.row, max_c=n.col;
+        double s;
         if (x == true){
             max_c -= 1;
         }
         while(row < max_r && col < max_c){
             r_now = row;
             first(n, row, col);
-            if (n.m[r_now][col] != 0 ){
-                multi(n, r_now, 1/n.m[r_now][col]);
+            s = n.m[r_now][col];
+            if (s != 0){
+                multi(n, r_now, 1/s);
             }
             for (i = r_now + 1; i < n.row; i++){
                 add(n, i, r_now, -n.m[i][col]);
@@ -55,7 +78,6 @@ public class Gauss {
             row++;
             col++;
         }
-
         return n;
     }
 

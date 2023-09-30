@@ -16,12 +16,10 @@ public class InversMenu {
         System.out.println();
         System.out.println("Masukkan pilihan input (1/2): ");
         int fromFile = scan.nextInt();
-        System.out.println();
-        switch (fromFile) {
-            default :
-                System.out.println("Input tidak dikenali. Mohon hanya masukkan 1 atau 2.");
-                fromFile = scan.nextInt();
-        } 
+        while ((fromFile != 1) && (fromFile != 2)){
+            System.out.println("Input tidak dikenali. Mohon hanya masukkan 1 atau 2.");
+            fromFile = scan.nextInt();
+        }
         if (fromFile == 1) {
             return false;
         } else {
@@ -68,21 +66,21 @@ public class InversMenu {
                 m = Invers.inversAdjoint(m);
                 break;
             default:
-            inputValid = false;
-            System.out.println("Input tidak dikenali. Mohon hanya masukkan 1 atau 2.\n");
-            menu();
+                inputValid = false;
+                System.out.println("Input tidak dikenali. Mohon hanya masukkan 1 atau 2.\n");
+                menu();
         }
         if (inputValid) {
             if (m != null) {
                 System.out.println();
                 System.out.println("Matriks balikan: ");
                 m.displayMatrix();
-                // Utils.matrixToFile(m);
+                Matrix.saveMatrix(m);
             } else {
                 String result = "Matriks tidak memiliki balikan";
                 System.out.println();
                 System.out.println(result);
-                // Utils.stringToFile(result);
+                Matrix.saveString(result);
             }
         }
         

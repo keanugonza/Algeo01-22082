@@ -150,12 +150,12 @@ public class SPLMenu {
                 result += ("x" + (j + 1) + " = " + String.format("%.4f", hasil.m[j][0]) + "\n");
             }
             System.out.println(result);
-            // Utils.matrixToFile(m);
+            Matrix.saveString(result);
         } else {
             result = "Matriks tidak memiliki balikan sehingga tidak bisa diselesaikan";
             System.out.println();
             System.out.println(result);
-            // Utils.stringToFile(result);
+            Matrix.saveString(result);
         }
         
     }
@@ -164,6 +164,7 @@ public class SPLMenu {
         String result = new String();
         result = Cramer.cramer(m1);
         System.out.println(result);
+        Matrix.saveString(result);
     }
 
     public static void menu() throws FileNotFoundException {

@@ -1,8 +1,11 @@
 package src.Menu;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import src.Method.Gauss_jordan;
+import src.Method.Invers;
 import src.Method.Matrix;
+import src.Method.Cramer;
 import src.Method.Gauss;
 
 public class SPLMenu {
@@ -130,27 +133,99 @@ public class SPLMenu {
         }
     }
 
-    public static void main(String[] args){
-        Matrix m1 = new Matrix(0, 0);
-        int method, masukan;
-        System.out.println("""
-        Pilih jenis masukan:    
-        1. Keyboard
-        2. File
-        """
-        );
-        masukan = scan.nextInt();
-        if (masukan == 1){
-            System.out.println("Masukkan matriks persamaan: ");
-            m1.inputRowCol();
-            m1.readMatrix();
-        } else {}
-        System.out.println("Pilih metode penyelesaian: ");
+    public static void splInversBalikan(Matrix m1){
+        int j;
+        String result = new String();
+        Matrix hasil = new Matrix(0, 0);
+        Matrix matrixMain = new Matrix(0, 0);
+        Matrix matrixEq = new Matrix(0, 0);
+        m1.splitMatrix(matrixMain, matrixEq, m1.col - 1);
+        matrixMain = Invers.inversAdjoint(matrixMain);
+        if (matrixMain != null) {
+            System.out.println();
+            System.out.println("Matriks balikan: ");
+            matrixMain.displayMatrix();
+            hasil = hasil.multiplyMatrix(matrixMain, matrixEq);
+            for (j = 0; j < hasil.row; j++){
+                result += ("x" + (j + 1) + " = " + String.format("%.4f", hasil.m[j][0]) + "\n");
+            }
+            System.out.println(result);
+            Matrix.saveString(result);
+        } else {
+            result = "Matriks tidak memiliki balikan sehingga tidak bisa diselesaikan. Coba metoed lain";
+            System.out.println();
+            System.out.println(result);
+            Matrix.saveString(result);
+        }
+        
+    }
+
+    public static void splCramer(Matrix m1){
+        String result = new String();
+        result = Cramer.cramer(m1);
+        System.out.println(result);
+        Matrix.saveString(result);
+    }
+
+    public static void menu() throws FileNotFoundException {
+        System.out.println();
+        System.out.println("Sistem Persamaan Linear");
+        System.out.println("1. Keyboard input");
+        System.out.println("2. File input");
+        System.out.print("Masukkan pilihan input: ");
+        int opt = 0;
+        int method;
+        boolean inputValid = true;
+        Matrix inputMat = new Matrix(0, 0);
+        try {
+            opt = scan.nextInt();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println();
+        switch(opt) {
+            case 1:
+                inputMat.inputRowCol();
+                inputMat.readMatrix();
+                break;
+            case 2:
+                Scanner scan = new Scanner(System.in);
+                System.out.println("Input nama file anda : ");    
+                String fileName = scan.nextLine();
+                inputMat = Matrix.fileToMatrix(fileName);
+                break;
+            default:
+                inputValid = false;
+                System.out.println("Input anda kurang tepat. Mohon masukkan 1 atau 2.\n");
+                menu();
+        }
+        if (inputValid) {
+            System.out.println("""
+        Pilih metode penyelesaian:
+        1. Metode eliminasi Gauss
+        2. Metode eliminasi Gauss-Jordan
+        3. Metode matriks balikan
+        4. Kaidah Cramer
+        """);
         method = scan.nextInt();
-        if (method == 1){
-            splGauss(m1);
-        } else if (method == 2){
-            splGaussJordan(m1);
+        while (method != 1 && method != 2 && method != 3 && method != 4){
+            System.out.print("Mohon masukan angka 1, 2, 3, atau 4");
+            method = scan.nextInt();
+        }
+        switch (method){
+            case 1:
+                splGauss(inputMat);
+                break;
+            case 2:
+                splGaussJordan(inputMat);
+                break;
+            case 3:
+                splInversBalikan(inputMat);
+                break;
+            case 4:
+                splCramer(inputMat);
+                break;
+        }
         }
     }
 }

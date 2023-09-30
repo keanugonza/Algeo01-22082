@@ -108,7 +108,7 @@ public class SPLMenu {
                                         System.out.printf(" - ");
                                     }
                                 }
-                                System.out.printf("%fx%d", -m1.m[i][count],count + 1);
+                                System.out.printf("%fx%d", m1.m[i][count],count + 1);
                             }
                             count += 1;
                         }

@@ -150,12 +150,12 @@ public class SPLMenu {
                 result += ("x" + (j + 1) + " = " + String.format("%.4f", hasil.m[j][0]) + "\n");
             }
             System.out.println(result);
-            // Utils.matrixToFile(m);
+            Matrix.saveString(result);
         } else {
-            result = "Matriks tidak memiliki balikan sehingga tidak bisa diselesaikan";
+            result = "Matriks tidak memiliki balikan sehingga tidak bisa diselesaikan. Coba metoed lain";
             System.out.println();
             System.out.println(result);
-            // Utils.stringToFile(result);
+            Matrix.saveString(result);
         }
         
     }
@@ -164,6 +164,7 @@ public class SPLMenu {
         String result = new String();
         result = Cramer.cramer(m1);
         System.out.println(result);
+        Matrix.saveString(result);
     }
 
     public static void menu() throws FileNotFoundException {
@@ -207,19 +208,23 @@ public class SPLMenu {
         4. Kaidah Cramer
         """);
         method = scan.nextInt();
-        switch (method){
-            default :
-            System.out.println("Input anda kurang tepat. Mohon masukkan 1, 2, 3, atau 4.\n");
+        while (method != 1 && method != 2 && method != 3 && method != 4){
+            System.out.print("Mohon masukan angka 1, 2, 3, atau 4");
             method = scan.nextInt();
         }
-        if (method == 1){
-            splGauss(inputMat);
-        } else if (method == 2){
-            splGaussJordan(inputMat);
-        } else if (method == 3){
-            splInversBalikan(inputMat);
-        } else if (method == 4){
-            splCramer(inputMat);
+        switch (method){
+            case 1:
+                splGauss(inputMat);
+                break;
+            case 2:
+                splGaussJordan(inputMat);
+                break;
+            case 3:
+                splInversBalikan(inputMat);
+                break;
+            case 4:
+                splCramer(inputMat);
+                break;
         }
         }
     }

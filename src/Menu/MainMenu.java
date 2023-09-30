@@ -32,16 +32,22 @@ public class MainMenu {
         switch (pilihan){
             case 1:
                 SPLMenu.menu();
+                break;
             case 2:
                 DeterminanMenu.main(args);
+                break;
             case 3:
                 InversMenu.menu();
+                break;
             case 4:
                 InterpolasiMenu.main(args);
+                break;
             case 5:
                 BicubicMenu.bikubik();
+                break;
             case 6:
                 RLBMenu.menu();
+                break;
             case 7:
                 keluar = true;
                 break;

@@ -38,7 +38,6 @@ public class Gauss {
 
     public static Matrix multi(Matrix n, int row, double x){
         int i;
-        double s;
         for(i = 0; i < n.col;i++){
             n.m[row][i] = rounding(n.m[row][i] *= x);
         }
@@ -59,6 +58,16 @@ public class Gauss {
         }
     }
 
+    public static boolean colZero(Matrix n, int row, int col){
+        boolean found = true;
+        for(int i=row; i< n.row;i++){
+            if (rounding(n.m[i][col]) != 0){
+                found = false;
+            }
+        }
+        return found;
+    }
+
     public static Matrix eliminasiGauss(Matrix n, boolean x){
         int row = 0, col = 0, r_now, i, max_r = n.row, max_c=n.col;
         double s;
@@ -67,7 +76,12 @@ public class Gauss {
         }
         while(row < max_r && col < max_c){
             r_now = row;
-            first(n, row, col);
+            first(n, r_now, col);
+            boolean z = colZero(n, row, col);
+            while (z && col < max_c){
+                col++;
+                z = colZero(n, row, col);
+            }
             s = n.m[r_now][col];
             if (s != 0){
                 multi(n, r_now, 1/s);

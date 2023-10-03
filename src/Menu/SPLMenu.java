@@ -238,9 +238,14 @@ public class SPLMenu {
                 break;
             case 2:
                 Scanner scan = new Scanner(System.in);
+                try {
                 System.out.println("Input nama path file anda : ");    
                 String fileName = scan.nextLine();
                 inputMat = Matrix.fileToMatrix(fileName);
+                } catch (FileNotFoundException e) {
+                    System.out.println("Tidak ditemukan file.");
+                    inputValid = false;
+                }
                 break;
             default:
                 inputValid = false;

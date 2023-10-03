@@ -152,9 +152,7 @@ public class BicubicMenu {
         M_final = Matrix.mergeMatrix(f, tambahan);
         l_constA = splGaussBicubic(M_final);
         l_final = fungsi1(a, b);
-        for(i=0;i<16;i++){
-            System.out.println(l_constA[i]);
-        }
+
         for(i=0;i<16;i++){
             hasil += l_constA[i]*l_final[i];
         }

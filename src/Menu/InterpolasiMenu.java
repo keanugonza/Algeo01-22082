@@ -64,22 +64,7 @@ public class InterpolasiMenu {
             derajat2 -= 1;
         }
         System.out.printf("Hasil dari f(%f) adalah %.4f",p,hasil);
-        System.out.println("Apakah ingi menyimpan jawaban dalam bentuk file? y/n");
-        String opt = "n";
-        try {
-            opt = scan.nextLine();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        switch(opt) {
-            case "y":
-                Matrix.saveString(persamaan);
-                break;
-            case "n":
-                break;
-            default:
-                System.out.println("Input anda kurang tepat. Mohon masukkan y atau n.\n");
-        }
+        Matrix.saveString(persamaan);
     }
 
     public static void InterpolasiFile(Matrix n){
@@ -136,22 +121,7 @@ public class InterpolasiMenu {
             derajat2 -= 1;
         }
         System.out.printf("Hasil dari f(%f) adalah %.4f",p,hasil);
-        System.out.println("Apakah ingi menyimpan jawaban dalam bentuk file? y/n");
-        String opt = "n";
-        try {
-            opt = scan.nextLine();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        switch(opt) {
-            case "y":
-                Matrix.saveString(persamaan);
-                break;
-            case "n":
-                break;
-            default:
-                System.out.println("Input anda kurang tepat. Mohon masukkan y atau n.\n");
-        }
+        Matrix.saveString(persamaan);
     }
 
     public static void Interpolasimenu() throws FileNotFoundException{

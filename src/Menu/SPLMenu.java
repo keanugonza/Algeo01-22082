@@ -79,13 +79,13 @@ public class SPLMenu {
                 t_ada = false;
                 if (r_zero == 0 && m1.row == m1.col - 1){
                     //jika solusi unik
-                    persamaan += String.format("x%d = %f\n", i + 1, m1.m[i][m1.col-1]);
+                    persamaan += String.format("x%d = %.4f\n", i + 1, m1.m[i][m1.col-1]);
                 } else {
                     int x;
                     x = Gauss_jordan.getFirstOne(m1, i); //menyimpan index kolom 1 pertama di baris i pada x
                     //mengecek nilai b (kolom terakhir)
                     if (m1.m[i][m1.col-1] != 0){ //jika nilai b bukan nol, tulis nilainya
-                        persamaan += String.format("x%d = %f", x + 1, m1.m[i][m1.col-1]);
+                        persamaan += String.format("x%d = %.4f", x + 1, m1.m[i][m1.col-1]);
                     } else {
                         if (getOther(m1.m[i]) > 0){
                         //jika ada nilai bukan nol di antara satu pertama dan b, maka akan ada variabel lain(parametrik)
@@ -93,7 +93,7 @@ public class SPLMenu {
                             t_ada = true; //menunjukkan tidak perlu perlu + - untuk variable parametrik
                         } else {
                         //tidak ada variabel lain, maka b tetap ditulis 0
-                            persamaan += String.format("x%d = %f", x + 1, m1.m[i][m1.col-1]);
+                            persamaan += String.format("x%d = %.4f", x + 1, m1.m[i][m1.col-1]);
                         }
                     }
                     if (getOther(m1.m[i]) > 0){
@@ -113,9 +113,9 @@ public class SPLMenu {
                             } else{
                                 if (current_val < 0){
                                 //jika nilai koefesien di kiri bernilai negatif, maka ketika dipindah ke kanan berubah menjadi positif
-                                    persamaan += String.format("%fx%d", -m1.m[i][col_f],col_f + 1);
+                                    persamaan += String.format("%.4fx%d", -m1.m[i][col_f],col_f + 1);
                                 } else {
-                                    persamaan += String.format("%fx%d", m1.m[i][col_f],col_f + 1);
+                                    persamaan += String.format("%.4fx%d", m1.m[i][col_f],col_f + 1);
                                 }
                             }
                             }
@@ -146,13 +146,13 @@ public class SPLMenu {
                 t_ada = false;
                 if (r_zero == 0 && m1.row == m1.col - 1){
                     //jika solusi unik
-                    persamaan += String.format("x%d = %f\n", i + 1, m1.m[i][m1.col-1]);
+                    persamaan += String.format("x%d = %.4f\n", i + 1, m1.m[i][m1.col-1]);
                 } else {
                     int x;
                     x = Gauss_jordan.getFirstOne(m1, i); //menyimpan index kolom 1 pertama di baris i pada x
                     //mengecek nilai b (kolom terakhir)
                     if (m1.m[i][m1.col-1] != 0){ //jika nilai b bukan nol, tulis nilainya
-                        persamaan += String.format("x%d = %f", x + 1, m1.m[i][m1.col-1]);
+                        persamaan += String.format("x%d = %.4f", x + 1, m1.m[i][m1.col-1]);
                     } else {
                         if (getOther(m1.m[i]) > 0){
                         //jika ada nilai bukan nol di antara satu pertama dan b, maka akan ada variabel lain(parametrik)
@@ -160,7 +160,7 @@ public class SPLMenu {
                             t_ada = true; //menunjukkan tidak perlu perlu + - untuk variable parametrik
                         } else {
                         //tidak ada variabel lain, maka b tetap ditulis 0
-                            persamaan += String.format("x%d = %f", x + 1, m1.m[i][m1.col-1]);
+                            persamaan += String.format("x%d = %.4f", x + 1, m1.m[i][m1.col-1]);
                         }
                     }
                     if (getOther(m1.m[i]) > 0){
@@ -180,9 +180,9 @@ public class SPLMenu {
                             } else{
                                 if (current_val < 0){
                                 //jika nilai koefesien di kiri bernilai negatif, maka ketika dipindah ke kanan berubah menjadi positif
-                                    persamaan += String.format("%fx%d", -m1.m[i][col_f],col_f + 1);
+                                    persamaan += String.format("%.4fx%d", -m1.m[i][col_f],col_f + 1);
                                 } else {
-                                    persamaan += String.format("%fx%d", m1.m[i][col_f],col_f + 1);
+                                    persamaan += String.format("%.4fx%d", m1.m[i][col_f],col_f + 1);
                                 }
                             }
                             }

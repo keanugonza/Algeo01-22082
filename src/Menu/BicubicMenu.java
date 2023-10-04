@@ -89,7 +89,7 @@ public class BicubicMenu {
     //melakukan metode SPL pada matrix bicubic 16x17
     public static double[] splGaussBicubic(Matrix m1){
         int i,j, r_zero = 0;
-        double[] l = new double[16];
+        double[] l = new double[m1.row];
         Gauss.eliminasiGauss(m1, true);
         for (i = 0; i < m1.row - r_zero; i++){
             for (j = i+1; j < m1.row - r_zero; j++){
@@ -97,7 +97,7 @@ public class BicubicMenu {
             }
         }
         for(i = 0;i<m1.row;i++){
-            l[i] = m1.m[i][m1.row];
+            l[i] = m1.m[i][m1.col-1];
         }
         return l;
     }

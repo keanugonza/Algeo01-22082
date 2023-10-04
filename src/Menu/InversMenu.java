@@ -27,7 +27,7 @@ public class InversMenu {
         }
     }
 
-    public static void menu() throws FileNotFoundException {
+    public static void menu() {
         System.out.println("         Matriks Balikan        ");
         System.out.println("1. Metode Eliminasi Gauss Jordan");
         System.out.println("2. Metode Adjoint");
@@ -43,27 +43,39 @@ public class InversMenu {
         switch (opt) {
             case 1:
                 if (fromFile()){
-                    try (Scanner scan = new Scanner(System.in)) {
-                        System.out.println("Input nama file anda : ");    
-                        String fileName = scan.nextLine();
+                    System.out.println("Input nama path file anda : ");    
+                    String fileName = scan.nextLine();
+                    try {
                         m = Matrix.fileToMatrix(fileName);
+                    } catch (FileNotFoundException e) {
+                        System.out.println("Tidak ditemukan file.");
+                        inputValid = false;
+                        break;
                     }
                 } else {
                     m.inputSquareMatrix();
                 }
-                m = Invers.inversGaussJordan(m);
+                if (inputValid = true){
+                    m = Invers.inversGaussJordan(m);
+                }
                 break;
             case 2:
                 if (fromFile()){
-                    try (Scanner scan = new Scanner(System.in)) {
-                        System.out.println("Input nama file anda : ");    
-                        String fileName = scan.nextLine();
+                    System.out.println("Input nama path file anda : ");    
+                    String fileName = scan.nextLine();
+                    try {
                         m = Matrix.fileToMatrix(fileName);
+                    } catch (FileNotFoundException e) {
+                        System.out.println("Tidak ditemukan file.");
+                        inputValid = false;
+                        break;
                     }
                 } else {
                     m.inputSquareMatrix();
                 }
-                m = Invers.inversAdjoint(m);
+                if (inputValid = true){
+                    m = Invers.inversGaussJordan(m);
+                }
                 break;
             default:
                 inputValid = false;

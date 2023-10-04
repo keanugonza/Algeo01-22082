@@ -181,7 +181,7 @@ public class SPLMenu {
         }
     }
 
-    public static void splInversBalikan(Matrix m1){
+    public static void splInversBalikan(Matrix m1){ //SPL metode invers matriks
         int j;
         String result = new String();
         Matrix hasil = new Matrix(0, 0);
@@ -189,17 +189,17 @@ public class SPLMenu {
         Matrix matrixEq = new Matrix(0, 0);
         m1.splitMatrix(matrixMain, matrixEq, m1.col - 1);
         matrixMain = Invers.inversAdjoint(matrixMain);
-        if (matrixMain != null) {
+        if (matrixMain != null) { //jika return dari fungsi invers tidak null artinya SPL memiliki penyelesaian
             System.out.println();
             System.out.println("Matriks balikan: ");
             matrixMain.displayMatrix();
             hasil = hasil.multiplyMatrix(matrixMain, matrixEq);
-            for (j = 0; j < hasil.row; j++){
+            for (j = 0; j < hasil.row; j++){ //menyusun string untuk output
                 result += ("x" + (j + 1) + " = " + String.format("%.4f", hasil.m[j][0]) + "\n");
             }
             System.out.println(result);
             Matrix.saveString(result);
-        } else {
+        } else { //jika return dari fungsi invers null artinya SPL tidak memeiliki penyelesaian
             result = "Matriks tidak memiliki balikan sehingga tidak bisa diselesaikan. Coba metoed lain";
             System.out.println();
             System.out.println(result);
@@ -208,14 +208,14 @@ public class SPLMenu {
         
     }
 
-    public static void splCramer(Matrix m1){
+    public static void splCramer(Matrix m1){ //invers metode cramer 
         String result = new String();
         result = Cramer.cramer(m1);
         System.out.println(result);
         Matrix.saveString(result);
     }
 
-    public static void menu() throws FileNotFoundException {
+    public static void menu() throws FileNotFoundException { //menu untuk SPL
         System.out.println();
         System.out.println("Sistem Persamaan Linear");
         System.out.println("1. Keyboard input");
@@ -232,11 +232,11 @@ public class SPLMenu {
         }
         System.out.println();
         switch(opt) {
-            case 1:
+            case 1: //masukan dari keyboard
                 inputMat.inputRowCol();
                 inputMat.readMatrix();
                 break;
-            case 2:
+            case 2: //masukan dari file
                 Scanner scan = new Scanner(System.in);
                 try {
                 System.out.println("Input nama path file anda : ");    
@@ -248,9 +248,9 @@ public class SPLMenu {
                 }
                 break;
             default:
-                inputValid = false;
+                inputValid = false; //tidak valid maka program selanjutnya tidak dieksekusi
                 System.out.println("Input anda kurang tepat. Mohon masukkan 1 atau 2.\n");
-                menu();
+                menu(); //kembali ke menu input sampai benar 1 atau 2
         }
         if (inputValid) {
             System.out.println("""
@@ -261,21 +261,21 @@ public class SPLMenu {
         4. Kaidah Cramer
         """);
         method = scan.nextInt();
-        while (method != 1 && method != 2 && method != 3 && method != 4){
-            System.out.print("Mohon masukan angka 1, 2, 3, atau 4");
+        while (method != 1 && method != 2 && method != 3 && method != 4){ // akan menglang sampai input benar 1,2,3 atau 4
+            System.out.print("Mohon masukan angka 1, 2, 3, atau 4\n");
             method = scan.nextInt();
         }
         switch (method){
-            case 1:
+            case 1: // untuk metode gauss
                 splGauss(inputMat);
                 break;
-            case 2:
+            case 2: // untuk metode gauss jordan
                 splGaussJordan(inputMat);
                 break;
-            case 3:
+            case 3: // untuk metode invers
                 splInversBalikan(inputMat);
                 break;
-            case 4:
+            case 4: // untuk metode cramer 
                 splCramer(inputMat);
                 break;
         }

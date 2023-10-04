@@ -16,9 +16,9 @@ public class InterpolasiMenu {
         int i,j,k = 0, count;
         i = derajat + 1;
         Matrix n = new Matrix(i,i+1);
+        System.out.println("Masukkan titik: ");
         while (i > 0){
             count = derajat;
-            System.out.println("Masukkan titik: ");
             x = scan.nextDouble();
             y = scan.nextDouble();
             for(j=0;j < n.col - 1;j++){
@@ -29,16 +29,57 @@ public class InterpolasiMenu {
             k++;
             i--;
         }
-        System.out.println("Masukkan nilai x yang ingin diketahui: ");
-        double p = scan.nextDouble();
+        String persamaan = "y = ";
         double hasil = 0;
+        int derajat2 = derajat;
         double[] l_x = new double[derajat+1];
         l_x = BicubicMenu.splGaussBicubic(n);
-        for (i=0;i<derajat;i++){
-            hasil += l_x[i]*Math.pow(p, derajat);
+        for (i=0;i<l_x.length;i++){
+            if (l_x[i] != 0){
+                if (i > 0){
+                    if (l_x[i] < 0){
+                        persamaan += " - ";
+                    } else {
+                        persamaan += " + ";
+                    }
+                }
+                if (derajat == 0){
+                    persamaan += String.format("%.4f",l_x[i]);
+                } else {
+                    if (l_x[i] == 1){
+                        persamaan += "x^" + derajat;
+                    } else {
+                        persamaan += String.format("%.4fx^%d",l_x[i], derajat);
+                    }
+                }
+            }
             derajat -= 1;
         }
-        System.out.printf("Hasil dari f(%f) adalah %f",p,hasil);
+        System.out.println("Persamaan hasi interpolasi: ");
+        System.out.println(persamaan);
+        System.out.println("Masukkan nilai x yang ingin diketahui: ");
+        double p = scan.nextDouble();
+        for (i=0;i<l_x.length;i++){
+            hasil += l_x[i]*Math.pow(p, derajat2);
+            derajat2 -= 1;
+        }
+        System.out.printf("Hasil dari f(%f) adalah %.4f",p,hasil);
+        System.out.println("Apakah ingi menyimpan jawaban dalam bentuk file? y/n");
+        String opt = "n";
+        try {
+            opt = scan.nextLine();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        switch(opt) {
+            case "y":
+                Matrix.saveString(persamaan);
+                break;
+            case "n":
+                break;
+            default:
+                System.out.println("Input anda kurang tepat. Mohon masukkan y atau n.\n");
+        }
     }
 
     public static void InterpolasiFile(Matrix n){
@@ -60,15 +101,57 @@ public class InterpolasiMenu {
             k++;
             i--;
         }
-        double p = n.m[n.row-1][0];
+        String persamaan = "y = ";
         double hasil = 0;
+        int derajat2 = derajat;
         double[] l_x = new double[derajat+1];
-        l_x = BicubicMenu.splGaussBicubic(m1);
-        for (i=0;i<derajat;i++){
-            hasil += l_x[i]*Math.pow(p, derajat);
+        l_x = BicubicMenu.splGaussBicubic(n);
+        for (i=0;i<l_x.length;i++){
+            if (l_x[i] != 0){
+                if (i > 0){
+                    if (l_x[i] < 0){
+                        persamaan += " - ";
+                    } else {
+                        persamaan += " + ";
+                    }
+                }
+                if (derajat == 0){
+                    persamaan += String.format("%.4f",l_x[i]);
+                } else {
+                    if (l_x[i] == 1){
+                        persamaan += "x^" + derajat;
+                    } else {
+                        persamaan += String.format("%.4fx^%d",l_x[i], derajat);
+                    }
+                }
+            }
             derajat -= 1;
         }
-        System.out.printf("Hasil dari f(%f) adalah %f",p,hasil);
+        System.out.println("Persamaan hasi interpolasi: ");
+        System.out.println(persamaan);
+        System.out.println("Masukkan nilai x yang ingin diketahui: ");
+        double p = scan.nextDouble();
+        for (i=0;i<l_x.length;i++){
+            hasil += l_x[i]*Math.pow(p, derajat2);
+            derajat2 -= 1;
+        }
+        System.out.printf("Hasil dari f(%f) adalah %.4f",p,hasil);
+        System.out.println("Apakah ingi menyimpan jawaban dalam bentuk file? y/n");
+        String opt = "n";
+        try {
+            opt = scan.nextLine();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        switch(opt) {
+            case "y":
+                Matrix.saveString(persamaan);
+                break;
+            case "n":
+                break;
+            default:
+                System.out.println("Input anda kurang tepat. Mohon masukkan y atau n.\n");
+        }
     }
 
     public static void Interpolasimenu() throws FileNotFoundException{
@@ -78,7 +161,6 @@ public class InterpolasiMenu {
         System.out.println("2. File input");
         System.out.print("Masukkan pilihan input: ");
         int opt = 0;
-        boolean inputValid = true;
         Matrix inputMat = new Matrix(0, 0);
         try {
             opt = scan.nextInt();
@@ -95,18 +177,16 @@ public class InterpolasiMenu {
                 System.out.println("Input path file anda : ");    
                 String fileName = scan.nextLine();
                 inputMat = Matrix.fileToMatrix(fileName);
-
+                InterpolasiFile(inputMat);
                 break;
             default:
-                inputValid = false;
                 System.out.println("Input anda kurang tepat. Mohon masukkan 1 atau 2.\n");
                 Interpolasimenu();
         }
-        if (inputValid) {
-        }
+        
     }
 
-    public static void main(String[] args){
-        
+    public static void main(String[] args) throws FileNotFoundException{
+        Interpolasimenu();
     }
 }

@@ -23,7 +23,7 @@ public class DeterminanMenu {
         switch (input){
             case 1:  //masukan dar keyboard
                 System.out.print("\n");
-                m1.inputRowCol();
+                m1.inputSquareMatrix();
                 m1.readMatrix();
                 System.out.print("\n");
                 System.out.println("1. Metode kofaktor");

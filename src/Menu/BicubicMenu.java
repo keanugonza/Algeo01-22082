@@ -156,14 +156,14 @@ public class BicubicMenu {
         }
 
         Matrix M_final = new Matrix(0, 0);
-        double[] l_constA = new double[16], l_final = new double[16];
+        double[] l_nilaiA = new double[16], l_final = new double[16];
 
         M_final = Matrix.mergeMatrix(f, tambahan);      //memasukan input dari file ke kolom ke 17.
-        l_constA = splGaussBicubic(M_final);            //melakakn metode spl ke matrix 16x17
+        l_nilaiA = splGaussBicubic(M_final);            //melakakn metode spl ke matrix 16x17
         l_final = fungsi1(a, b);
 
         for(i=0;i<16;i++){
-            hasil += l_constA[i]*l_final[i];
+            hasil += l_nilaiA[i]*l_final[i];
         }
         System.out.println(hasil);
 

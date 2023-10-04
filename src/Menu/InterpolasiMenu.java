@@ -8,6 +8,7 @@ import java.lang.Math;
 public class InterpolasiMenu {
     private static Scanner scan = new Scanner(System.in);
 
+    //Mengolah input dari keyboard
     public static void Interpolasi(){
         double x,y;
         int derajat;
@@ -76,12 +77,15 @@ public class InterpolasiMenu {
         Matrix.saveString(persamaan);
     }
 
+    //Mengolah input dari file
     public static void InterpolasiFile(Matrix n){
         double x,y;
         int derajat;
         derajat = n.row-2;
         int i,j,k = 0, count=0;
         i = derajat+1;
+
+        //mengubah matriks n menjadi matriks augmented
         Matrix m1 = new Matrix(i, i + 1);
         while (i > 0){
             count = derajat;
@@ -95,6 +99,8 @@ public class InterpolasiMenu {
             k++;
             i--;
         }
+
+        //mengolah matriks dan mengeluarkan hasil persamaan
         String persamaan = "y = ";
         double hasil = 0;
         int derajat2 = derajat;
@@ -131,8 +137,12 @@ public class InterpolasiMenu {
         }
         System.out.println("Persamaan hasi interpolasi: ");
         System.out.println(persamaan);
+
+        //mengolah input x dengan persamaan yang didapat untuk mengeluarkan hasil f(x)
+        derajat = derajat2;
         for (k=0;k<n.col;k++){
             hasil = 0;
+            derajat2 = derajat;
             double p = n.m[n.row-1][k];
             for(i=0; i<l_x.length;i++){
                 hasil += l_x[i]*Math.pow(p, derajat2);
@@ -141,6 +151,8 @@ public class InterpolasiMenu {
             System.out.printf("Hasil dari f(%f) adalah %.4f\n",p,hasil);
             persamaan += String.format("; f(%f) = %.4f",p,hasil);
         }
+
+        //mensave string jika pilih Y//
         Matrix.saveString(persamaan);
     }
 
@@ -150,6 +162,7 @@ public class InterpolasiMenu {
         System.out.println("1. Keyboard input");
         System.out.println("2. File input");
         System.out.print("Masukkan pilihan input: ");
+
         int opt = 0;
         Matrix inputMat = new Matrix(0, 0);
         try {
@@ -158,6 +171,7 @@ public class InterpolasiMenu {
             System.out.println(e.getMessage());
         }
         System.out.println();
+        // mengecek input
         switch(opt) {
             case 1:
                 Interpolasi();

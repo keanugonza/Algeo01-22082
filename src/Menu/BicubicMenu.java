@@ -10,7 +10,6 @@ import src.Method.Matrix;
 public class BicubicMenu {
     private static Scanner scan = new Scanner(System.in);
 
-    //membuat fungsi(x,y)
     private static double[] fungsi1(double x, double y){
         double[] l = new double[16];
         int c,i = 0,j = 0;
@@ -25,7 +24,6 @@ public class BicubicMenu {
         return l;
     }
 
-    //membuat fungsi turunan x
     private static double[] fungsiX(double x, double y){
         double[] l = new double[16];
         int c,i = 0,j = 0;
@@ -45,8 +43,6 @@ public class BicubicMenu {
         return l;
     }
     
-
-    //membuat fungsi turunan y
     private static double[] fungsiY(double x, double y){
         double[] l = new double[16];
         int c,i = 0,j = 0;
@@ -66,7 +62,6 @@ public class BicubicMenu {
         return l;
     }
 
-    //membuat fungsi turunan xy
     private static double[] fungsiXY(double x, double y){
         double[] l = new double[16];
         int c,i = 0,j = 0;
@@ -86,8 +81,6 @@ public class BicubicMenu {
         return l;
     }
 
-
-    //spl untuk matrix bicubic 16x16
     public static double[] splGaussBicubic(Matrix m1){
         int i,j, r_zero = 0;
         double[] l = new double[16];
@@ -124,8 +117,6 @@ public class BicubicMenu {
         a = fromFile.m[4][0];
         b = fromFile.m[4][1];
 
-
-        //membuat matrix 16x16
         for (i=0; i<16; i++){
             if (i < 4){
                 f.m[i] = fungsi1(x, y);
@@ -146,7 +137,6 @@ public class BicubicMenu {
             }
         }
 
-        //input nilai f(x,y) dari file
         Matrix tambahan = new Matrix(16,1);
         int j,p = 0;
         for(i=0;i<4;i++){
@@ -159,12 +149,12 @@ public class BicubicMenu {
         Matrix M_final = new Matrix(0, 0);
         double[] l_constA = new double[16], l_final = new double[16];
 
-        M_final = Matrix.mergeMatrix(f, tambahan);    //memasukan nilai tiap f(x,y) atau turunannya di kolom terakhir sesuai baris menjadi matrix 16x17
-        l_constA = splGaussBicubic(M_final);          //melakukan metode SPl pada matrix untuk mendapatkan koefisien 
+        M_final = Matrix.mergeMatrix(f, tambahan);
+        l_constA = splGaussBicubic(M_final);
         l_final = fungsi1(a, b);
 
         for(i=0;i<16;i++){
-            hasil += l_constA[i]*l_final[i];         //menghasilkan jawaban
+            hasil += l_constA[i]*l_final[i];
         }
         System.out.println(hasil);
 

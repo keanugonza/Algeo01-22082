@@ -10,6 +10,7 @@ import src.Method.Matrix;
 public class BicubicMenu {
     private static Scanner scan = new Scanner(System.in);
 
+    //membuat fungsi(x,y)
     private static double[] fungsi1(double x, double y){
         double[] l = new double[16];
         int c,i = 0,j = 0;
@@ -24,6 +25,7 @@ public class BicubicMenu {
         return l;
     }
 
+    //membuat turunan x fungsi(x,y)
     private static double[] fungsiX(double x, double y){
         double[] l = new double[16];
         int c,i = 0,j = 0;
@@ -43,6 +45,7 @@ public class BicubicMenu {
         return l;
     }
     
+    //membuat turunan y dari fungsi f(x,y)
     private static double[] fungsiY(double x, double y){
         double[] l = new double[16];
         int c,i = 0,j = 0;
@@ -62,6 +65,7 @@ public class BicubicMenu {
         return l;
     }
 
+    //membuat turunan xydari fungsi f(x,y)
     private static double[] fungsiXY(double x, double y){
         double[] l = new double[16];
         int c,i = 0,j = 0;
@@ -81,6 +85,8 @@ public class BicubicMenu {
         return l;
     }
 
+
+    //melakukan metode SPL pada matrix bicubic 16x17
     public static double[] splGaussBicubic(Matrix m1){
         int i,j, r_zero = 0;
         double[] l = new double[16];
@@ -97,6 +103,7 @@ public class BicubicMenu {
     }
 
 
+    //program utama bicubic
     public static void bikubik(){
         boolean file = true;
         int i, x=0, y=0;
@@ -117,6 +124,7 @@ public class BicubicMenu {
         a = fromFile.m[4][0];
         b = fromFile.m[4][1];
 
+        //membuat matrix 16x16
         for (i=0; i<16; i++){
             if (i < 4){
                 f.m[i] = fungsi1(x, y);
@@ -137,6 +145,7 @@ public class BicubicMenu {
             }
         }
 
+        //input ddari file
         Matrix tambahan = new Matrix(16,1);
         int j,p = 0;
         for(i=0;i<4;i++){
@@ -149,8 +158,8 @@ public class BicubicMenu {
         Matrix M_final = new Matrix(0, 0);
         double[] l_constA = new double[16], l_final = new double[16];
 
-        M_final = Matrix.mergeMatrix(f, tambahan);
-        l_constA = splGaussBicubic(M_final);
+        M_final = Matrix.mergeMatrix(f, tambahan);      //memasukan input dari file ke kolom ke 17.
+        l_constA = splGaussBicubic(M_final);            //melakakn metode spl ke matrix 16x17
         l_final = fungsi1(a, b);
 
         for(i=0;i<16;i++){

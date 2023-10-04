@@ -36,8 +36,9 @@ public class RLBMenu {
     
     public static void fileToMatrix2(Matrix input, Matrix x) throws FileNotFoundException{ // mengubah dari file ke matriks utama dan matriks peubah
         String fileName = new String();
-        System.out.print("Masukan nama file:");
+        System.out.print("Masukan nama path file:");
         fileName = scan.next();
+        try {
         File file  = new File(fileName);
         Scanner inputFile = new Scanner(file);
         
@@ -77,6 +78,9 @@ public class RLBMenu {
             i++;
         }
         inputFile.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Tidak ditemukan file.");
+        }
     }
 
     public static Matrix toRLB(Matrix m1) { // mengubah matriks input ke bentuk normal estimation equation
@@ -173,6 +177,9 @@ public class RLBMenu {
                 break;
             case 2: //untuk masukan file
                 fileToMatrix2(inputMat, x);
+                 if (inputMat.row == 0){
+                    inputValid = false;
+                }
                 break;
             default:
                 inputValid = false; //maka ipnout tidak valid program selanjutnya tidak dieksekusi

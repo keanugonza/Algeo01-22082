@@ -21,7 +21,7 @@ public class DeterminanMenu {
         }
         Matrix m1 = new Matrix(0,0);
         switch (input){
-            case 1:
+            case 1:  //masukan dar keyboard
                 System.out.print("\n");
                 m1.inputRowCol();
                 m1.readMatrix();
@@ -51,9 +51,9 @@ public class DeterminanMenu {
                 Matrix.saveString(s);
                 break;
                 
-            case 2:
+            case 2: //masukan dari file
                 System.out.print("\n");
-                System.out.print("Masukan nama file:");
+                System.out.print("Masukan nama path file:");
                 String namaFile = scan.next();
                 try{
                     m1 = Matrix.fileToMatrix(namaFile);

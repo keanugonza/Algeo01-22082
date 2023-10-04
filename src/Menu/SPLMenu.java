@@ -11,6 +11,26 @@ import src.Method.Gauss;
 public class SPLMenu {
     private static Scanner scan = new Scanner(System.in);
 
+    public static boolean checkMatrix(Matrix n){
+        int i = n.row-1, j=0, count = 0;
+        boolean found = false;
+        while (found == false && i >= 0){
+            if (Gauss.rounding(n.m[i][j]) == 0){
+                count++;
+            }
+            j++;
+            if (j > n.col - 1){
+                j = 0;
+                i -= 1;
+                if(count == n.col-1){
+                    found = true;
+                }
+                count = 0;
+            }
+        }
+        return found;
+    }
+
     public static int zeroRow(Matrix n){
         int i = n.row-1,j = 0, count = 0;
         boolean found = false;
@@ -52,83 +72,111 @@ public class SPLMenu {
 
     public static void splGauss(Matrix m1){
         int i,j, r_zero = 0, count = 1;
-        boolean ada = false;
+        boolean ada;
         Gauss.eliminasiGauss(m1, true);
-        r_zero = zeroRow(m1);
-        for (i = 0; i < m1.row - r_zero; i++){
-            for (j = i+1; j < m1.row - r_zero; j++){
-                Gauss.add(m1, i, j, -m1.m[i][Gauss_jordan.getFirstOne(m1,j)]);
-            }
-        }
-        for (i = 0; i < m1.row - r_zero; i++){
-            if (r_zero == 0){
-                System.out.printf("x%d = %f", i + 1, m1.m[i][m1.col-1]);
-                System.out.println();
-            } else {
-                int x;
-                x = Gauss_jordan.getFirstOne(m1, i);
-                if (m1.m[i][m1.col-1] != 0){
-                    System.out.printf("x%d = %f", x + 1, m1.m[i][m1.col-1]);
-                } else {
-                    System.out.printf("x%d = ", x + 1);
-                    ada = true;
+        if (checkMatrix(m1)){
+            System.out.println("Persamaan tidak memiliki penyelesaian.");
+        } else {
+            r_zero = zeroRow(m1);
+            for (i = 0; i < m1.row - r_zero; i++){
+                for (j = i+1; j < m1.row - r_zero; j++){
+                    Gauss.add(m1, i, j, -m1.m[i][Gauss_jordan.getFirstOne(m1,j)]);
                 }
-                if (getOther(m1.m[i]) > 0){
-                    count = Gauss_jordan.getFirstOne(m1,i) + 1;
-                    while (count < m1.col - 1){
-                        if (m1.m[i][count] != 0){
-                            if (ada == false){
-                                if (m1.m[i][count] < 0){
-                                    System.out.printf(" + ");
+            }
+            for (i = 0; i < m1.row - r_zero; i++){
+                ada = false;
+                if (r_zero == 0){
+                    System.out.printf("x%d = %f", i + 1, m1.m[i][m1.col-1]);
+                    System.out.println();
+                } else {
+                    int x;
+                    x = Gauss_jordan.getFirstOne(m1, i);
+                    if (m1.m[i][m1.col-1] != 0){
+                        System.out.printf("x%d = %f", x + 1, m1.m[i][m1.col-1]);
+                    } else {
+                        System.out.printf("x%d = ", x + 1);
+                        ada = true;
+                    }
+                    if (getOther(m1.m[i]) > 0){
+                        count = Gauss_jordan.getFirstOne(m1,i) + 1;
+                        while (count < m1.col - 1){
+                            double b = m1.m[i][count];
+                            if (b != 0){
+                                if (ada == false){
+                                    if (b < 0){
+                                        System.out.printf(" + ");
+                                    } else {
+                                        System.out.printf(" - ");
+                                    }
+                                }
+                            if (Math.abs(b) == 1){
+                                System.out.printf("x%d", count + 1);
+                            } else{
+                                if (b < 0){
+                                    System.out.printf("%fx%d", -m1.m[i][count],count + 1);
                                 } else {
-                                    System.out.printf(" - ");
+                                    System.out.printf("%fx%d", m1.m[i][count],count + 1);
                                 }
                             }
-                            System.out.printf("%fx%d", -m1.m[i][count],count + 1);
+                            }
+                            count += 1;
                         }
-                        count += 1;
                     }
+                    System.out.println();
                 }
-                System.out.println();
             }
         }
     }
 
     public static void splGaussJordan(Matrix m1){
         int i, r_zero = 0, count = 1;
-        boolean ada = false;
-        Gauss.eliminasiGauss(m1, true);
-        r_zero = zeroRow(m1);
-        for (i = 0; i < m1.row - r_zero; i++){
-            if (r_zero == 0){
-                System.out.printf("x%d = %f", i + 1, m1.m[i][m1.col-1]);
-                System.out.println();
-            } else {
-                int x;
-                x = Gauss_jordan.getFirstOne(m1, i);
-                if (m1.m[i][m1.col-1] != 0){
-                    System.out.printf("x%d = %f", x + 1, m1.m[i][m1.col-1]);
+        boolean ada;
+        Gauss_jordan.eliminasiGaussJordan(m1, true);
+        if (checkMatrix(m1) == true){
+            System.out.println("Persamaan tidak memiliki penyelesaian.");
+        } else {
+            r_zero = zeroRow(m1);
+            for (i = 0; i < m1.row - r_zero; i++){
+                if (r_zero == 0){
+                    System.out.printf("x%d = %f", i + 1, m1.m[i][m1.col-1]);
+                    System.out.println();
                 } else {
-                    System.out.printf("x%d = ", x + 1);
-                    ada = true;
-                }
-                if (getOther(m1.m[i]) > 0){
-                    count = Gauss_jordan.getFirstOne(m1,i) + 1;
-                    while (count < m1.col - 1){
-                        if (m1.m[i][count] != 0){
-                            if (ada == false){
-                                if (m1.m[i][count] < 0){
-                                    System.out.printf(" + ");
-                                } else {
-                                    System.out.printf(" - ");
-                                }
-                            }
-                            System.out.printf("%fx%d", -m1.m[i][count],count + 1);
-                        }
-                        count += 1;
+                    int x;
+                    x = Gauss_jordan.getFirstOne(m1, i);
+                    if (m1.m[i][m1.col-1] != 0){
+                        System.out.printf("x%d = %f", x + 1, m1.m[i][m1.col-1]);
+                    } else {
+                        System.out.printf("x%d = ", x + 1);
+                        ada = true;
                     }
+                    if (getOther(m1.m[i]) > 0){
+                        ada = false;
+                        count = Gauss_jordan.getFirstOne(m1,i) + 1;
+                        while (count < m1.col - 1){
+                            double b = m1.m[i][count];
+                            if (b != 0){
+                                if (ada == false){
+                                    if (b < 0){
+                                        System.out.printf(" + ");
+                                    } else {
+                                        System.out.printf(" - ");
+                                    }
+                                }
+                            if (Math.abs(b) == 1){
+                                System.out.printf("x%d", count + 1);
+                            } else{
+                                if (b < 0){
+                                    System.out.printf("%fx%d", -m1.m[i][count],count + 1);
+                                } else {
+                                    System.out.printf("%fx%d", m1.m[i][count],count + 1);
+                                }
+                            } 
+                            }
+                            count += 1;
+                        }
+                    }
+                    System.out.println();
                 }
-                System.out.println();
             }
         }
     }
@@ -190,9 +238,14 @@ public class SPLMenu {
                 break;
             case 2: //masukan dari file
                 Scanner scan = new Scanner(System.in);
-                System.out.println("Input nama file anda : ");    
+                try {
+                System.out.println("Input nama path file anda : ");    
                 String fileName = scan.nextLine();
                 inputMat = Matrix.fileToMatrix(fileName);
+                } catch (FileNotFoundException e) {
+                    System.out.println("Tidak ditemukan file.");
+                    inputValid = false;
+                }
                 break;
             default:
                 inputValid = false; //tidak valid maka program selanjutnya tidak dieksekusi

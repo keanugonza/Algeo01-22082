@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class MainMenu {
     private static Scanner scan = new Scanner(System.in);
     public static void main(String[] args) throws FileNotFoundException{
-        System.out.println("KELOMPOK APICK\n");
-        System.out.println("MENU");
+        System.out.println("\nKELOMPOK APICK");
+        System.out.println("========== MENU ==========");
         System.out.print("""
         1. Sistem Persamaaan Linier
         2. Determinan
@@ -32,23 +32,29 @@ public class MainMenu {
         switch (pilihan){
             case 1:
                 SPLMenu.menu();
+                break;
             case 2:
                 DeterminanMenu.main(args);
+                break;
             case 3:
                 InversMenu.menu();
+                break;
             case 4:
                 InterpolasiMenu.main(args);
+                break;
             case 5:
                 BicubicMenu.bikubik();
+                break;
             case 6:
                 RLBMenu.menu();
+                break;
             case 7:
                 keluar = true;
                 break;
         }
 
         if (!keluar){
-            System.out.println("""
+            System.out.print("""
             1. Kembali ke Menu
             2. Keluar
             Masukan pilihan anda: """);

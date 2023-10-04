@@ -26,8 +26,8 @@ public class InversMenu {
             return true;
         }
     }
-
-    public static void menu() throws FileNotFoundException { // menu untuk invers 
+  
+    public static void menu() {
         System.out.println("         Matriks Balikan        ");
         System.out.println("1. Metode Eliminasi Gauss Jordan");
         System.out.println("2. Metode Adjoint");
@@ -43,27 +43,41 @@ public class InversMenu {
         switch (opt) {
             case 1: // menggunakan metode eliminasi gauss jordan
                 if (fromFile()){
-                    try (Scanner scan = new Scanner(System.in)) { // path file yang dimasukkan harus sesuai
-                        System.out.println("Input nama file anda : ");    
-                        String fileName = scan.nextLine();
+
+                    System.out.println("Input nama path file anda : ");    
+                    String fileName = scan.nextLine();
+                    try {
                         m = Matrix.fileToMatrix(fileName);
+                    } catch (FileNotFoundException e) {
+                        System.out.println("Tidak ditemukan file.");
+                        inputValid = false;
+                        break;
                     }
                 } else {
                     m.inputSquareMatrix();
                 }
-                m = Invers.inversGaussJordan(m);
+                if (inputValid = true){
+                    m = Invers.inversGaussJordan(m);
+                }
                 break;
             case 2: // menggunakan metode adjoint
                 if (fromFile()){
-                    try (Scanner scan = new Scanner(System.in)) { // path file yang dimasukkan harus sesuai
-                        System.out.println("Input nama file anda : ");    
-                        String fileName = scan.nextLine();
+
+                    System.out.println("Input nama path file anda : ");    
+                    String fileName = scan.nextLine();
+                    try {
                         m = Matrix.fileToMatrix(fileName);
+                    } catch (FileNotFoundException e) {
+                        System.out.println("Tidak ditemukan file.");
+                        inputValid = false;
+                        break;
                     }
                 } else {
                     m.inputSquareMatrix();
                 }
-                m = Invers.inversAdjoint(m);
+                if (inputValid = true){
+                    m = Invers.inversGaussJordan(m);
+                }
                 break;
             default:
                 inputValid = false; // jika input file salah salah maka input tidak valid sehingga program tidak dieksekusi

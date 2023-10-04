@@ -49,13 +49,14 @@ public class MainMenu {
                 RLBMenu.menu();
                 break;
             case 7:
+                System.out.println("Terima kasih teah menjalankan program kami..");
                 keluar = true;
                 break;
         }
 
         if (!keluar){
             System.out.print("""
-            1. Kembali ke Menu
+            1. Kembali ke Menu Utama
             2. Keluar
             Masukan pilihan anda: """);
     
@@ -69,6 +70,9 @@ public class MainMenu {
     
             if(pilihan2 == 1){
                 main(args);
+            }
+            else{
+                System.out.println("Terima kasih teah menjalankan program kami..");
             }
         }
     }

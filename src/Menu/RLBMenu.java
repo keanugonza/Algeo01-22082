@@ -10,7 +10,7 @@ import src.Method.Matrix;
 public class RLBMenu {
     private static Scanner scan = new Scanner(System.in);
 
-    public static void readKeyboard(Matrix input, Matrix x) {
+    public static void readKeyboard(Matrix input, Matrix x) { // membaca masukan dari keyboard yaitu matriks dan peubah
         int n, m;
         System.out.print("Masukkan jumlah peubah : ");
         scan.nextLine();
@@ -34,7 +34,7 @@ public class RLBMenu {
         }
     }
     
-    public static void fileToMatrix2(Matrix input, Matrix x) throws FileNotFoundException{
+    public static void fileToMatrix2(Matrix input, Matrix x) throws FileNotFoundException{ // mengubah dari file ke matriks utama dan matriks peubah
         String fileName = new String();
         System.out.print("Masukan nama file:");
         fileName = scan.next();
@@ -47,7 +47,7 @@ public class RLBMenu {
         countCol = 0;
 
         //mencari banyak baris dan kolom terlebih dahulu
-        while(inputFile.hasNextLine()){
+        while(inputFile.hasNextLine()){ //membaca baris per baris sampai baris terakhir
             String[] value = inputFile.nextLine().split(" ", -1);
             countCol = Math.max(countCol, value.length);
             countRow++;
@@ -62,14 +62,14 @@ public class RLBMenu {
         x.m = new double[1][countCol - 1];
     
         inputFile = new Scanner(file);
-        while(inputFile.hasNextLine()){
+        while(inputFile.hasNextLine()){ //membaca baris per baris sampai baris sebelum terakhir
             String[] value = inputFile.nextLine().split(" ",-1);
-            if (value.length == countCol){ 
+            if (value.length == countCol){ //memasukkan matriks sampai baris sebelum terakhir bdari file ke matirks input
                 for(int j=0;j<countCol;j++){
                     input.m[i][j] = Double.parseDouble(value[j]);
                 }
             }
-            else{ //untuk mengatasi kasus pada file pada interpolasi dan bicubic
+            else{ //memasukkan baris terakhir dari file ke matriks peubah
                 for(int j=0;j<value.length;j++){
                     x.m[0][j] = Double.parseDouble(value[j]);
                 }
@@ -79,7 +79,7 @@ public class RLBMenu {
         inputFile.close();
     }
 
-    public static Matrix toRLB(Matrix m1) {
+    public static Matrix toRLB(Matrix m1) { // mengubah matriks input ke bentuk normal estimation equation
         Matrix matrixMain = new Matrix(m1.col, m1.col + 1);
         for (int i = 0; i < m1.col ; i++){
             for (int j = 0; j < m1.col + 1; j++){
@@ -103,7 +103,7 @@ public class RLBMenu {
         return matrixMain;
     }
 
-    public static void outputRLB(Matrix m1, Matrix x) {
+    public static void outputRLB(Matrix m1, Matrix x) { // hasil dari matriks input dan matriks peubah
         String result = new String();
         String est = new String();
         Matrix matrixMain = new Matrix(0, 0);
@@ -151,7 +151,7 @@ public class RLBMenu {
     }
 
     
-    public static void menu() throws FileNotFoundException {
+    public static void menu() throws FileNotFoundException { // menu untuk RLB
         System.out.println();
         System.out.println("REGRESI LINEAR BERGANDA");
         System.out.println("1. Keyboard input");
@@ -168,22 +168,22 @@ public class RLBMenu {
         }
         System.out.println();
         switch (opt) {
-            case 1:
+            case 1: //untuk masukan keyboard
                 readKeyboard(inputMat, x);
                 break;
-            case 2:
+            case 2: //untuk masukan file
                 fileToMatrix2(inputMat, x);
                 break;
             default:
-                inputValid = false;
+                inputValid = false; //maka ipnout tidak valid program selanjutnya tidak dieksekusi
                 System.out.println("Input anda kurang tepat. Mohon masukkan 1 atau 2.\n");
-                menu();
+                menu(); //kembali ke menu sampai masukan 1 atau 2
         }
         if (inputValid) {
             inputMat = toRLB(inputMat);
-            if (opt == 1){
+            if (opt == 1){ //untuk masukan keyboard
                 outputRLB(inputMat, x);
-            } else if (opt == 2){
+            } else if (opt == 2){  //untuk masukan file
                 outputRLB(inputMat, x);
             }
         }

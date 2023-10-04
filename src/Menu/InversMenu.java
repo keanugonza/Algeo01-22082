@@ -45,7 +45,7 @@ public class InversMenu {
                 if (fromFile()){
 
                     System.out.println("Input nama path file anda : ");    
-                    String fileName = scan.nextLine();
+                    String fileName = scan.next();
                     try {
                         m = Matrix.fileToMatrix(fileName);
                     } catch (FileNotFoundException e) {
@@ -64,7 +64,7 @@ public class InversMenu {
                 if (fromFile()){
 
                     System.out.println("Input nama path file anda : ");    
-                    String fileName = scan.nextLine();
+                    String fileName = scan.next();
                     try {
                         m = Matrix.fileToMatrix(fileName);
                     } catch (FileNotFoundException e) {

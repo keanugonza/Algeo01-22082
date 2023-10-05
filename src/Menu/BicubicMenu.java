@@ -105,6 +105,8 @@ public class BicubicMenu {
 
     //program utama bicubic
     public static void bikubik(){
+
+        System.out.println("INTERPOLASI BICUBIC SPLINE");
         boolean file = true;
         int i, x=0, y=0;
         double a, b, hasil = 0;
@@ -165,12 +167,14 @@ public class BicubicMenu {
         for(i=0;i<16;i++){
             hasil += l_nilaiA[i]*l_final[i];
         }
-        System.out.println(hasil);
 
-        System.out.print("\n");
         String s1 = "f(";
         s1 = s1 + (String.format("%2f", a)) + "," + (String.format("%2f", b)) + ") = " + (String.format("%4f", hasil));
+        System.out.print("\n");
+        System.out.println(s1);
+        System.out.print("\n");
         Matrix.saveString(s1);
+        System.out.print("\n");
         }
     }
 }

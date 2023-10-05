@@ -447,6 +447,35 @@ public class Matrix{
     public static Matrix eadFile(String fileName) {
         return null;
     }
+
+    public static Matrix hilbert(int n){
+        Matrix m1 = new Matrix(n,n);
+        for(int i=0; i<n;i++){
+            for(int j=0; j<n;j++){
+                m1.m[i][j] = 1.0/ (i+j+1);
+            }
+        }
+
+        Matrix tambahan = new Matrix(n, 1);
+        for(int i=0; i<n;i++){
+                if(i==0){
+                    tambahan.m[i][0] = 1;
+                }
+                else{
+                    tambahan.m[i][0] = 0;
+                }
+        }
+
+        Matrix hasil = new Matrix(0, 0);
+        hasil =mergeMatrix(m1, tambahan);
+        return hasil;
+    }
+
+    public static void main(String[] args){
+        Matrix hilbert = new Matrix(0, 0);
+        hilbert = hilbert(6);
+        hilbert.displayMatrix();
+    }
  
 }
 

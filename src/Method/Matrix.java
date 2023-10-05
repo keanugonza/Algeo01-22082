@@ -299,7 +299,7 @@ public class Matrix{
 
                 try (FileWriter filewriter = new FileWriter(file_name)){
                     for(int i=0;i<m1.row;i++){
-                        for(int j=0;j<m1.row;j++){
+                        for(int j=0;j<m1.col;j++){
                             filewriter.write(String.format("%.4f ", m1.m[i][j]));
                         }
                     filewriter.write("\n");
@@ -447,7 +447,42 @@ public class Matrix{
     public static Matrix eadFile(String fileName) {
         return null;
     }
- 
+
+     public static Matrix hilbert(int n){
+        Matrix m1 = new Matrix(n,n);
+        double cons = 1;
+        for(int i=0; i<n;i++){
+            for(int j=0; j<n;j++){
+                m1.m[i][j] = cons/ (1+ i+j);
+            }
+        }
+
+        Matrix tambahan = new Matrix(n, 1);
+        for(int i=0; i<n;i++){
+                if(i==0){
+                    tambahan.m[i][0] = 1;
+                }
+                else{
+                    tambahan.m[i][0] = 0;
+                }
+        }
+
+        Matrix hasil = new Matrix(0, 0);
+        hasil = Matrix.mergeMatrix(m1, tambahan);
+        return hasil;
+    }
+    
+    //membuat matrix hilbert lalu save ke file.
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        Matrix hilbert = new Matrix(0, 0);
+        System.out.print("Masukan n matrix hilbert: ");
+        int n = scan.nextInt();
+        hilbert = hilbert(n);
+        hilbert.displayMatrix();
+        Matrix.saveMatrix(hilbert);
+        scan.close();
+    }
 }
 
 

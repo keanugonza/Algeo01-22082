@@ -31,7 +31,6 @@ public class InterpolasiMenu {
             k++;
             i--;
         }
-        n.displayMatrix();
         String persamaan = "y = ";
         double hasil = 0;
         int derajat2 = derajat;

@@ -63,7 +63,6 @@ public class SPLMenu {
         String persamaan = "";
         boolean t_ada;
         Gauss.eliminasiGauss(m1, true);
-        m1.displayMatrix();
         if (checkMatrix(m1)){
             System.out.println("Persamaan tidak memiliki penyelesaian.");
             persamaan += "Persamaan tidak memiliki penyelesaian.";

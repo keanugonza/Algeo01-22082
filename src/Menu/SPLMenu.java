@@ -200,7 +200,7 @@ public class SPLMenu {
 
     public static void splInversBalikan(Matrix m1){ //SPL metode invers matriks
         String kata;
-        if (!m1.isSquare()){
+        if (m1.col != m1.row + 1){
             kata = "Persamaan tidak bisa diselesaikan menggunakan metode invers.";
             System.out.println(kata);
             Matrix.saveString(kata);
@@ -234,7 +234,7 @@ public class SPLMenu {
 
     public static void splCramer(Matrix m1){ //invers metode cramer
         String kata;
-        if (!m1.isSquare()){
+        if (m1.col != m1.row + 1){
             kata = "Persamaan tidak bisa diselesaikan menggunakan metode cramer.";
             System.out.println(kata);
             Matrix.saveString(kata);

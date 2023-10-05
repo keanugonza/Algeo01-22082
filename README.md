@@ -13,24 +13,26 @@ Tugas besar membuat semacam kalkulator matriks yang menggunakan bahasa Java yang
 
 TUBES-ALGEO-APICK <br>
 
-<!-- ┣ bin/ <br>
-┃ ┣ Aplikasi/ <br>
-┃ ┃ ┣ BicubicInterpolationApp.class <br>
-┃ ┃ ┣ DeterminantApp.class <br>
-┃ ┃ ┣ InterpolasiApp.class <br>
-┃ ┃ ┣ InverseApp.class <br>
-┃ ┃ ┣ RLBApp.class <br>
-┃ ┃ ┗ SPLApp.class <br>
-┃ ┣ Matrix/ <br>
-┃ ┃ ┣ Determinant.class <br>
-┃ ┃ ┣ Inverse.class <br>
-┃ ┃ ┣ Matrix.class <br>
-┃ ┃ ┗ SPL.class <br>
+┣ bin/ <br>
+┃ ┣ Menu/ <br>
+┃ ┃ ┣ BicubicMenu.class <br>
+┃ ┃ ┣ DeterminanMenu.class <br>
+┃ ┃ ┣ InterpolasiMenu.class <br>
+┃ ┃ ┣ InverseMenu.class <br>
+┃ ┃ ┣ MainMenu.class <br>
+┃ ┃ ┣ RLBMenu.class <br>
+┃ ┃ ┗ SPLMenu.class <br>
+┃ ┣ Method/ <br>
+┃ ┃ ┣ Cramer.class <br>
+┃ ┃ ┣ Determinan.class <br>
+┃ ┃ ┣ Gauss_jordan.class <br>
+┃ ┃ ┣ Gauss.class <br>
+┃ ┃ ┣ Invers.class <br>
+┃ ┃ ┗ Matrix.class <br>
 ┃ ┣ Utils/ <br>
 ┃ ┃ ┗ Utils.class <br>
 ┃ ┗ Main.class <br>
-┣ lib/ <br> -->
-
+┣ doc/ <br>
 ┣ src/ <br>
 ┃ ┣ Menu/ <br>
 ┃ ┃ ┣ BicubicMenu.java <br>
@@ -50,26 +52,15 @@ TUBES-ALGEO-APICK <br>
 ┣ Test/ <br>
 ┃ ┣ Input/ <br>
 ┃ ┗ Output/ <br>
-
-<!-- ┣ .gitignore <br> -->
-
 ┗ README.md <br>
 
-<!-- ## How to run
+## How to run
 
-Clone this repo https://github.com/keanugonza/Tubes-Algeo-Apick.git
+Duplikat link berikut https://github.com/keanugonza/Tubes-Algeo-Apick.git
 
-### Using .class
+### cara Memakai .jar
 
-1. Go to folder bin `cd bin`
-2. Open in terminal
-3. Run Main.class `java Main`
-4. File inputs can be put into the `./test` folder
-
-### Using .jar
-
-1. Download the .jar file that is located in `./lib`
-2. Put the .jar file in a certain folder
-3. In root of the folder that contains .jar file, create a new folder named `test` for file input
-4. cd to the folder containing the .jar file
-5. Use `java -jar <jar-file-name>` to run the program -->
+1. Download FinalTubes.jar 
+2. Buka terminal, lalu masukan code : `java --enable-preview -jar <pathFileJar>`
+3. Ganti pathFileJar sesuai dengan path file jar anda
+4. Program kami siap digunakan 

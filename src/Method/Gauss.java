@@ -45,6 +45,14 @@ public class Gauss {
         return n;
     }
 
+    public static Matrix divide(Matrix n, int row, double x){//membagikan semua anggota baris row pada matriks n dengan x
+        int i;
+        for(i = 0; i < n.col;i++){
+            n.m[row][i] = rounding(n.m[row][i] /= x);
+        }
+        return n;
+    }
+
     public static void first(Matrix n, int r_start, int col){
     //mengubah nilai matrik pada baris r_start dan kolom col jika nilainya nol 
     //dengan cara menukarnya dengan baris yang elemen kolom ke col nya tidak nol
@@ -88,8 +96,8 @@ public class Gauss {
                 z = colZero(n, row, col);
             }
             current_val = n.m[row][col];
-            if (current_val != 0){//jika nilai elemen saat ini bukan nol
-                multi(n, row, 1/current_val);//membagi elemen saat ini dengan dirinya sendiri agar mendapat nilai satu
+            if (rounding(current_val) != 0){//jika nilai elemen saat ini bukan nol
+                divide(n, row, current_val);//membagi elemen saat ini dibagi dengan dirinya sendiri agar mendapat nilai satu
             }
             for (i = row + 1; i < n.row; i++){
                 add(n, i, row, -n.m[i][col]);//mengubah nilai di bawah satu utama menjadi nol

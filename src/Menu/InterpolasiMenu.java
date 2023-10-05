@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import src.Method.Matrix;
 import java.lang.Math;
+import src.Method.Gauss;
 
 public class InterpolasiMenu {
     private static Scanner scan = new Scanner(System.in);
@@ -92,13 +93,14 @@ public class InterpolasiMenu {
             x = n.m[k][0];
             y = n.m[k][1];
             for(j=0;j < m1.col-1;j++){
-                m1.m[k][j] = Math.pow(x, count);
+                m1.m[k][j] = Gauss.rounding(Math.pow(x, count));
                 count -= 1;
             }
             m1.m[k][m1.col-1] = y;
             k++;
             i--;
         }
+        m1.displayMatrix();
 
         //mengolah matriks dan mengeluarkan hasil persamaan
         String persamaan = "y = ";

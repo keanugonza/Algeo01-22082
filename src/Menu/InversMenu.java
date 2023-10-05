@@ -43,7 +43,6 @@ public class InversMenu {
         switch (opt) {
             case 1: // menggunakan metode eliminasi gauss jordan
                 if (fromFile()){
-
                     System.out.println("Input nama path file anda : ");    
                     String fileName = scan.nextLine();
                     try {
@@ -62,7 +61,6 @@ public class InversMenu {
                 break;
             case 2: // menggunakan metode adjoint
                 if (fromFile()){
-
                     System.out.println("Input nama path file anda : ");    
                     String fileName = scan.nextLine();
                     try {

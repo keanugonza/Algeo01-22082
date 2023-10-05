@@ -182,37 +182,51 @@ public class SPLMenu {
     }
 
     public static void splInversBalikan(Matrix m1){ //SPL metode invers matriks
-        int j;
-        String result = new String();
-        Matrix hasil = new Matrix(0, 0);
-        Matrix matrixMain = new Matrix(0, 0);
-        Matrix matrixEq = new Matrix(0, 0);
-        m1.splitMatrix(matrixMain, matrixEq, m1.col - 1);
-        matrixMain = Invers.inversAdjoint(matrixMain);
-        if (matrixMain != null) { //jika return dari fungsi invers tidak null artinya SPL memiliki penyelesaian
-            System.out.println();
-            System.out.println("Matriks balikan: ");
-            matrixMain.displayMatrix();
-            hasil = hasil.multiplyMatrix(matrixMain, matrixEq);
-            for (j = 0; j < hasil.row; j++){ //menyusun string untuk output
-                result += ("x" + (j + 1) + " = " + String.format("%.4f", hasil.m[j][0]) + "\n");
+        String kata;
+        if (!m1.isSquare()){
+            kata = "Persamaan tidak bisa diselesaikan menggunakan metode invers.";
+            System.out.println(kata);
+            Matrix.saveString(kata);
+        } else{
+            int j;
+            String result = new String();
+            Matrix hasil = new Matrix(0, 0);
+            Matrix matrixMain = new Matrix(0, 0);
+            Matrix matrixEq = new Matrix(0, 0);
+            m1.splitMatrix(matrixMain, matrixEq, m1.col - 1);
+            matrixMain = Invers.inversAdjoint(matrixMain);
+            if (matrixMain != null) { //jika return dari fungsi invers tidak null artinya SPL memiliki penyelesaian
+                System.out.println();
+                System.out.println("Matriks balikan: ");
+                matrixMain.displayMatrix();
+                hasil = hasil.multiplyMatrix(matrixMain, matrixEq);
+                for (j = 0; j < hasil.row; j++){ //menyusun string untuk output
+                    result += ("x" + (j + 1) + " = " + String.format("%.4f", hasil.m[j][0]) + "\n");
+                }
+                System.out.println(result);
+                Matrix.saveString(result);
+            } else { //jika return dari fungsi invers null artinya SPL tidak memeiliki penyelesaian
+                result = "Matriks tidak memiliki balikan sehingga tidak bisa diselesaikan. Coba metoed lain";
+                System.out.println();
+                System.out.println(result);
+                Matrix.saveString(result);
             }
-            System.out.println(result);
-            Matrix.saveString(result);
-        } else { //jika return dari fungsi invers null artinya SPL tidak memeiliki penyelesaian
-            result = "Matriks tidak memiliki balikan sehingga tidak bisa diselesaikan. Coba metoed lain";
-            System.out.println();
-            System.out.println(result);
-            Matrix.saveString(result);
         }
         
     }
 
-    public static void splCramer(Matrix m1){ //invers metode cramer 
-        String result = new String();
-        result = Cramer.cramer(m1);
-        System.out.println(result);
-        Matrix.saveString(result);
+    public static void splCramer(Matrix m1){ //invers metode cramer
+        String kata;
+        if (!m1.isSquare()){
+            kata = "Persamaan tidak bisa diselesaikan menggunakan metode cramer.";
+            System.out.println(kata);
+            Matrix.saveString(kata);
+        } else {
+            String result = new String();
+            result = Cramer.cramer(m1);
+            System.out.println(result);
+            Matrix.saveString(result);
+        }
     }
 
     public static void menu() throws FileNotFoundException { //menu untuk SPL

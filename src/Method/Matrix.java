@@ -450,9 +450,10 @@ public class Matrix{
 
     public static Matrix hilbert(int n){
         Matrix m1 = new Matrix(n,n);
+        double cons = 1;
         for(int i=0; i<n;i++){
             for(int j=0; j<n;j++){
-                m1.m[i][j] = 1.0/ (i+j+1);
+                m1.m[i][j] = cons/ (1+ i+j);
             }
         }
 
@@ -473,8 +474,11 @@ public class Matrix{
 
     public static void main(String[] args){
         Matrix hilbert = new Matrix(0, 0);
-        hilbert = hilbert(6);
+        System.out.print("Masukan n matrix hilbert: ");
+        int n = scan.nextInt();
+        hilbert = hilbert(n);
         hilbert.displayMatrix();
+        saveMatrix(hilbert);
     }
  
 }
